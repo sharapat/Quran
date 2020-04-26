@@ -11,11 +11,11 @@ data class ExtraText (
     var id: Int,
 
     @ColumnInfo(name = "qosimsha")
-    var extraId: Int?,
+    var extraId: Int,
 
     @ColumnInfo(name = "text")
-    var text: String?,
+    var text: String,
 
     @ColumnInfo(name = "lower")
-    var lower: String?
+    var lower: String
 )

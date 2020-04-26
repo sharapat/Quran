@@ -3,4 +3,7 @@
     <dimen name="margin_small">8dp</dimen>
     <dimen name="text_size_standard">16sp</dimen>
     <dimen name="margin_standard">16dp</dimen>
+    <dimen name="arab_text_standard_size">18sp</dimen>
+    <dimen name="tool_bar_text_size">20sp</dimen>
+    <dimen name="margin_large">32dp</dimen>
 </resources>

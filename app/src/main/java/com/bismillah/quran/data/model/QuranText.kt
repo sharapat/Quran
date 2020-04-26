@@ -11,8 +11,8 @@ data class QuranText(
     var id: Int,
 
     @ColumnInfo(name = "title")
-    var titleId: Int?,
+    var titleId: Int,
 
     @ColumnInfo(name = "text")
-    var text: String?
+    var text: String
 )

@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 @Entity(tableName = "sureler")
 data class Sure (
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int,
 
@@ -15,6 +15,9 @@ data class Sure (
     @ColumnInfo(name = "name")
     var name: String,
 
+    @ColumnInfo(name = "original_name")
+    var originalName: String,
+
     @ColumnInfo(name = "place")
     var place: String,
 
@@ -22,11 +25,11 @@ data class Sure (
     var description: String,
 
     @ColumnInfo(name = "lower_name")
-    var lowerName: String?,
+    var lowerName: String,
 
     @ColumnInfo(name="place_lower")
-    var lowerPlace: String?,
+    var lowerPlace: String,
 
     @ColumnInfo(name="lower_description")
-    var lowerDescription: String?
+    var lowerDescription: String
 )

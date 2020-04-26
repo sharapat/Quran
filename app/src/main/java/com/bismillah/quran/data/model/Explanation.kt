@@ -14,11 +14,11 @@ data class Explanation(
     var sureId: Int,
 
     @ColumnInfo(name="number")
-    var number: Int?,
+    var number: Int,
 
     @ColumnInfo(name = "text")
     var text: String,
 
     @ColumnInfo(name = "lower")
-    var lower: String?
+    var lower: String
 )
