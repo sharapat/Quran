@@ -8,14 +8,14 @@ import androidx.room.PrimaryKey
 data class ExtraText (
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
-    val id: Int,
+    var id: Int,
 
     @ColumnInfo(name = "qosimsha")
-    val extraId: Int,
+    var extraId: Int?,
 
     @ColumnInfo(name = "text")
-    val text: Int,
+    var text: String?,
 
     @ColumnInfo(name = "lower")
-    val lower: String
+    var lower: String?
 )

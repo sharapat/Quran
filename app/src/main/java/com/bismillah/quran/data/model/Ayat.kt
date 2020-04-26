@@ -8,16 +8,16 @@ import androidx.room.PrimaryKey
 data class Ayat(
 
     @ColumnInfo(name = "sure")
-    val sureId: Int,
+    var sureId: Int,
 
     @ColumnInfo(name = "text")
-    val text: String,
+    var text: String,
 
     @ColumnInfo(name = "lower")
-    val lower: String,
+    var lower: String?,
 
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Int
+    var id: Int
 
 )

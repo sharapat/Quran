@@ -8,11 +8,11 @@ import androidx.room.PrimaryKey
 data class QuranText(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
-    val id: Int,
+    var id: Int,
 
     @ColumnInfo(name = "title")
-    val titleId: String,
+    var titleId: Int?,
 
     @ColumnInfo(name = "text")
-    val text: String
+    var text: String?
 )

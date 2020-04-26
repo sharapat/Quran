@@ -2,11 +2,14 @@ package com.bismillah.quran.di
 
 import androidx.room.Room
 import com.bismillah.quran.data.QuranDatabase
-import org.koin.dsl.module.module
+import com.bismillah.quran.ui.translation.TranslationListViewModel
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
 val dataModule = module {
     single {  Room
-                .databaseBuilder(get(),
+                .databaseBuilder(androidContext(),
                 QuranDatabase::class.java,
                 "base.db"
                 )
@@ -14,4 +17,8 @@ val dataModule = module {
                 .build()
     }
     single { get<QuranDatabase>().quranDao() }
+}
+
+val viewModelModule = module {
+    viewModel { TranslationListViewModel(get()) }
 }
