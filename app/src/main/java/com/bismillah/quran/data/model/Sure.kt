@@ -7,26 +7,26 @@ import androidx.room.PrimaryKey
 data class Sure (
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
-    val id: Int,
+    var id: Int,
 
     @ColumnInfo(name = "number")
-    val number: Int,
+    var number: Int,
 
     @ColumnInfo(name = "name")
-    val name: String,
+    var name: String,
 
     @ColumnInfo(name = "place")
-    val place: String,
+    var place: String,
 
     @ColumnInfo(name = "description")
-    val description: String,
+    var description: String,
 
     @ColumnInfo(name = "lower_name")
-    val lowerName: String,
+    var lowerName: String?,
 
     @ColumnInfo(name="place_lower")
-    val lowerPlace: String,
+    var lowerPlace: String?,
 
     @ColumnInfo(name="lower_description")
-    val lowerDescription: String
+    var lowerDescription: String?
 )

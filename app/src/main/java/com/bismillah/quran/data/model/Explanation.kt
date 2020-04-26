@@ -8,17 +8,17 @@ import androidx.room.PrimaryKey
 data class Explanation(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
-    val id: Int,
+    var id: Int,
 
     @ColumnInfo(name="sure")
-    val sureId: Int,
+    var sureId: Int,
 
     @ColumnInfo(name="number")
-    val number: Int,
+    var number: Int?,
 
     @ColumnInfo(name = "text")
-    val text: String,
+    var text: String,
 
     @ColumnInfo(name = "lower")
-    val lower: String
+    var lower: String?
 )
