@@ -11,8 +11,8 @@ data class Extra(
     var id: Int,
 
     @ColumnInfo(name = "title")
-    var title: String?,
+    var title: String,
 
     @ColumnInfo(name = "lower")
-    var lower: String?
+    var lower: String
 )

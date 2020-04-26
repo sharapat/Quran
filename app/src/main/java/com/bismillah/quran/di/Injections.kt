@@ -2,7 +2,8 @@ package com.bismillah.quran.di
 
 import androidx.room.Room
 import com.bismillah.quran.data.QuranDatabase
-import com.bismillah.quran.ui.translation.TranslationListViewModel
+import com.bismillah.quran.ui.ayat.AyatListViewModel
+import com.bismillah.quran.ui.sure.SureListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -20,5 +21,6 @@ val dataModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { TranslationListViewModel(get()) }
+    viewModel { SureListViewModel(get()) }
+    viewModel { AyatListViewModel(get()) }
 }

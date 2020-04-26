@@ -14,7 +14,7 @@ data class Ayat(
     var text: String,
 
     @ColumnInfo(name = "lower")
-    var lower: String?,
+    var lower: String,
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
