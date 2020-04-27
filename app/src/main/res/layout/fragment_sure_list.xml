@@ -42,31 +42,49 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <EditText
-        android:id="@+id/etSearch"
+    <RelativeLayout
+        android:id="@+id/rlSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/background_search"
         android:layout_marginStart="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_small"
         android:layout_marginEnd="@dimen/margin_small"
-        android:hint="@string/search_by_title"
-        android:padding="@dimen/margin_small"
-        android:textSize="@dimen/text_size_standard"
-        android:drawableStart="@drawable/ic_search_black_24dp"
-        android:inputType="text"
-        android:imeOptions="actionSearch"
-        android:importantForAutofill="no" />
+        >
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_search"
+            android:hint="@string/search_by_title"
+            android:padding="@dimen/margin_small"
+            android:textSize="@dimen/text_size_standard"
+            android:drawableStart="@drawable/ic_search_black_24dp"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:importantForAutofill="no" />
+
+        <ImageView
+            android:id="@+id/btnClearSearchText"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_close_black_24dp"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/margin_small"
+            android:contentDescription="@string/todo"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSure"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etSearch"
+        app:layout_constraintTop_toBottomOf="@id/rlSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="@dimen/margin_small"
