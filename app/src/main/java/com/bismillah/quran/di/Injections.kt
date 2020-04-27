@@ -1,9 +1,13 @@
 package com.bismillah.quran.di
 
+import android.content.Context
 import androidx.room.Room
+import com.bismillah.quran.Settings
 import com.bismillah.quran.data.QuranDatabase
+import com.bismillah.quran.ui.ayat.AyatListAdapter
 import com.bismillah.quran.ui.ayat.AyatListViewModel
 import com.bismillah.quran.ui.sure.SureListViewModel
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -18,6 +22,12 @@ val dataModule = module {
                 .build()
     }
     single { get<QuranDatabase>().quranDao() }
+    single { androidApplication().applicationContext.getSharedPreferences("com.bismillah.quran.preferences", Context.MODE_PRIVATE) }
+    single { Settings(get()) }
+}
+
+val adapterModule = module {
+    single { AyatListAdapter(get()) }
 }
 
 val viewModelModule = module {

@@ -27,4 +27,14 @@ class SureListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
             _translationList.postValue(quranDao.getAllSure())
         }
     }
+
+    fun searchSureByWord(word: String) {
+        launch { searchSureByWordSync(word) }
+    }
+
+    private suspend fun searchSureByWordSync(word: String) {
+        withContext(Dispatchers.IO) {
+            _translationList.postValue(quranDao.searchSureByWord(word))
+        }
+    }
 }
