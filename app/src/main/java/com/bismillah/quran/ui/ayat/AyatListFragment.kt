@@ -2,11 +2,13 @@ package com.bismillah.quran.ui.ayat
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
 import com.bismillah.quran.Settings
+import com.bismillah.quran.callback.AyatItemClickListener
 import com.bismillah.quran.di.dataModule
 import com.bismillah.quran.extentions.dp
 import com.bismillah.quran.ui.base.BaseFragment
@@ -17,7 +19,7 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
+class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClickListener {
 
     private val viewModel: AyatListViewModel by viewModel()
     private val adapter: AyatListAdapter by inject()
@@ -26,6 +28,7 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter.itemClickListener = this
         rvAyat.adapter = adapter
         rvAyat.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         val sureId = safeArgs.sureId
@@ -50,6 +53,10 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
             settings.setTextSize(currentSize-2)
             adapter.update()
         }
+    }
+
+    override fun onLinkClick(number: Int) {
+        Toast.makeText(context, number.toString(), Toast.LENGTH_SHORT).show()
     }
 
 }

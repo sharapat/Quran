@@ -27,14 +27,14 @@ class AyatListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
         launch { getSureByIdAsync(sureId) }
     }
 
+    fun getAyatList(sureId: Int) {
+        launch { getAyatListAsync(sureId) }
+    }
+
     private suspend fun getSureByIdAsync(sureId: Int) {
         withContext(Dispatchers.IO) {
             _currentSure.postValue(quranDao.getSureById(sureId))
         }
-    }
-
-    fun getAyatList(sureId: Int) {
-        launch { getAyatListAsync(sureId) }
     }
 
     private suspend fun getAyatListAsync(sureId: Int) {

@@ -1,11 +1,11 @@
 package com.bismillah.quran.ui.sure
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bismillah.quran.R
 import com.bismillah.quran.callback.SureItemClickListener
 import com.bismillah.quran.data.model.Sure
+import com.bismillah.quran.extentions.inflate
 
 class SureListAdapter(private val itemClickListener: SureItemClickListener) : RecyclerView.Adapter<SureListViewHolder>() {
 
@@ -16,7 +16,7 @@ class SureListAdapter(private val itemClickListener: SureItemClickListener) : Re
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SureListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_sure, parent, false)
+        val view = parent.inflate(R.layout.item_sure)
         return SureListViewHolder(view)
     }
 

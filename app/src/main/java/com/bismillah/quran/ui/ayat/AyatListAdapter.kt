@@ -1,13 +1,16 @@
 package com.bismillah.quran.ui.ayat
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bismillah.quran.R
 import com.bismillah.quran.Settings
+import com.bismillah.quran.callback.AyatItemClickListener
 import com.bismillah.quran.data.model.Ayat
+import com.bismillah.quran.extentions.inflate
 
 class AyatListAdapter(private val settings: Settings) : RecyclerView.Adapter<AyatListViewHolder>() {
+
+    var itemClickListener: AyatItemClickListener? = null
 
     var models: List<Ayat> = listOf()
         set(value) {
@@ -20,8 +23,8 @@ class AyatListAdapter(private val settings: Settings) : RecyclerView.Adapter<Aya
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AyatListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_ayat, parent, false)
-        return AyatListViewHolder(view)
+        val view = parent.inflate(R.layout.item_ayat)
+        return AyatListViewHolder(view, itemClickListener)
     }
 
     override fun getItemCount(): Int = models.size
