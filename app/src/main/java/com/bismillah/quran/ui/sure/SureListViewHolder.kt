@@ -15,5 +15,8 @@ class SureListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.setOnClickListener {
             itemClickListener.onSureClick(sure.id)
         }
+        itemView.tvOriginalName.setOnClickListener {
+            itemClickListener.onOriginalSureClick(sure.id)
+        }
     }
 }

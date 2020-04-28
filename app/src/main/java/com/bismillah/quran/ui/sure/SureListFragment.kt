@@ -55,6 +55,11 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClic
         navController.navigate(action)
     }
 
+    override fun onOriginalSureClick(sureId: Int) {
+        val action = SureListFragmentDirections.actionTranslationFragmentToOriginalAyatFragment(sureId)
+        navController.navigate(action)
+    }
+
     fun fillRecyclerView(s: Editable?) {
         if (s.isNullOrEmpty()) {
             btnClearSearchText.visibility(false)
