@@ -16,6 +16,6 @@
         android:textSize="@dimen/text_size_standard"
         android:textColor="@android:color/background_dark"
         android:drawablePadding="16dp"
-        android:text="sadsdasd"/>
+        android:textColorLink="@color/color_link"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
