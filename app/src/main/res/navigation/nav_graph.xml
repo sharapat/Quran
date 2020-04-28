@@ -22,14 +22,30 @@
 
         <action
             android:id="@+id/action_ayatListFragment"
+            app:destination="@id/ayatExplanationFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
 
         <argument
             android:name="sureId"
             app:argType="integer"
             android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/ayatExplanationFragment"
+        android:name="com.bismillah.quran.ui.explanation.ayat.AyatExplanationFragment"
+        android:label="AyatExplanationFragment">
+        <action
+            android:id="@+id/ayatExplanationFragmentAction"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="explanationNumber"
+            android:defaultValue="0" />
+        <argument android:name="sureName" />
     </fragment>
 </navigation>

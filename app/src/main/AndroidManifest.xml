@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme"
         android:name=".QuranApp">
         <activity android:name=".ui.main.MainActivity"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="unspecified"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
