@@ -50,15 +50,15 @@
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="bottom|end"
         android:textSize="@dimen/arab_text_standard_size"
-        android:textColor="@android:color/background_dark"/>
+        android:textColor="@android:color/background_dark" />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginEnd="@dimen/margin_standard"
-        android:layout_marginBottom="@dimen/margin_standard"
+        android:paddingStart="@dimen/margin_standard"
+        android:paddingEnd="@dimen/margin_standard"
+        android:paddingBottom="@dimen/margin_standard"
         android:minHeight="20dp"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -67,7 +67,7 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
         navController.navigate(action)
     }
 
-    fun hideKeyboard(activity: Activity) {
+    private fun hideKeyboard(activity: Activity) {
         val imm: InputMethodManager =
             activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         var view = activity.currentFocus

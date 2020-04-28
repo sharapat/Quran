@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.bismillah.quran.data.model.Ayat
 import com.bismillah.quran.data.model.Explanation
+import com.bismillah.quran.data.model.QuranText
 import com.bismillah.quran.data.model.Sure
 
 @Dao
@@ -23,5 +24,8 @@ interface QuranDao {
 
     @Query("SELECT * FROM tusindirmeler WHERE number=:number")
     fun getExplanationsByNumber(number: Int): List<Explanation>
+
+    @Query("SELECT * FROM texts WHERE title=:sureId")
+    fun getOriginalAyatListBySureId(sureId: Int) : List<QuranText>
 
 }

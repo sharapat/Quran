@@ -34,7 +34,7 @@ class AyatExplanationFragment : BaseFragment(R.layout.fragment_explanation_ayat)
         })
         tvToolbarTitle.text = safeArgs.sureName
         backButton.setOnClickListener {
-            activity?.onBackPressed()
+            requireActivity().onBackPressed()
         }
         btnMinus.setOnClickListener {
             val currentTextSize = settings.getTextSize()
