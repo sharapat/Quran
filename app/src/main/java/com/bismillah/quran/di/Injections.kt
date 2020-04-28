@@ -6,6 +6,7 @@ import com.bismillah.quran.Settings
 import com.bismillah.quran.data.QuranDatabase
 import com.bismillah.quran.ui.ayat.AyatListAdapter
 import com.bismillah.quran.ui.ayat.AyatListViewModel
+import com.bismillah.quran.ui.ayatoriginal.OriginalAyatRVAdapter
 import com.bismillah.quran.ui.ayatoriginal.OriginalAyatViewModel
 import com.bismillah.quran.ui.explanation.ayat.AyatExplanationViewModel
 import com.bismillah.quran.ui.sure.SureListViewModel
@@ -30,6 +31,7 @@ val dataModule = module {
 
 val adapterModule = module {
     single { AyatListAdapter(get()) }
+    single { OriginalAyatRVAdapter(get()) }
 }
 
 val viewModelModule = module {
