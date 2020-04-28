@@ -34,7 +34,7 @@ class SureListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
 
     private suspend fun searchSureByWordSync(word: String) {
         withContext(Dispatchers.IO) {
-            _translationList.postValue(quranDao.searchSureByWord(word))
+            _translationList.postValue(quranDao.searchSureByWord("$word%"))
         }
     }
 }

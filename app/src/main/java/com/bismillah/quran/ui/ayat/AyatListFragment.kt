@@ -1,7 +1,9 @@
 package com.bismillah.quran.ui.ayat
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -23,6 +25,11 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
     private val safeArgs: AyatListFragmentArgs by navArgs()
     private lateinit var navController: NavController
     private lateinit var sureName: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        hideKeyboard(requireActivity())
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,6 +65,16 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
     override fun onLinkClick(number: Int) {
         val action = AyatListFragmentDirections.actionAyatListFragment(number, sureName)
         navController.navigate(action)
+    }
+
+    fun hideKeyboard(activity: Activity) {
+        val imm: InputMethodManager =
+            activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = activity.currentFocus
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }

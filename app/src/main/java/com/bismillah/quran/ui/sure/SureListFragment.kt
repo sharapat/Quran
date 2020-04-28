@@ -28,7 +28,9 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClic
         navController = Navigation.findNavController(view)
         rvSure.adapter = adapter
         rvSure.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        viewModel.getAllSureTranslations()
+
+        fillRecyclerView(etSearch.text)
+
         viewModel.translationList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
         })
@@ -39,19 +41,10 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClic
 
         etSearch.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (s.isNullOrEmpty()) {
-                    btnClearSearchText.visibility(false)
-                    viewModel.getAllSureTranslations()
-                }
-                else {
-                    btnClearSearchText.visibility(true)
-                    viewModel.searchSureByWord(s.toString())
-                }
+                fillRecyclerView(s)
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
@@ -60,5 +53,16 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClic
     override fun onSureClick(sureId: Int) {
         val action = SureListFragmentDirections.actionTranslationFragmentToAyatListFragment(sureId)
         navController.navigate(action)
+    }
+
+    fun fillRecyclerView(s: Editable?) {
+        if (s.isNullOrEmpty()) {
+            btnClearSearchText.visibility(false)
+            viewModel.getAllSureTranslations()
+        }
+        else {
+            btnClearSearchText.visibility(true)
+            viewModel.searchSureByWord(s.toString())
+        }
     }
 }
