@@ -1,4 +1,4 @@
-package com.bismillah.quran.ui.sure
+package com.bismillah.quran.ui.explanation.sure
 
 import android.os.Bundle
 import android.text.Editable
@@ -12,14 +12,15 @@ import com.bismillah.quran.R
 import com.bismillah.quran.callback.SureItemClickListener
 import com.bismillah.quran.extentions.visibility
 import com.bismillah.quran.ui.base.BaseFragment
+import com.bismillah.quran.ui.sure.SureListAdapter
+import com.bismillah.quran.ui.sure.SureListViewModel
 import kotlinx.android.synthetic.main.fragment_sure_list.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class SureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClickListener {
-
+class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClickListener {
     private val viewModel: SureListViewModel by viewModel()
-    private val adapter: SureListAdapter = SureListAdapter(this)
     private lateinit var navController: NavController
+    private val adapter = SureListAdapter(this, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,13 +50,12 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClic
     }
 
     override fun onSureClick(sureId: Int, sureName: String) {
-        val action = SureListFragmentDirections.actionTranslationFragmentToAyatListFragment(sureId, sureName)
+        val action = ExplanationSureListFragmentDirections
+            .actionExplanationSureListFragmentToSureExplanationFragment(sureId, sureName)
         navController.navigate(action)
     }
 
     override fun onOriginalSureClick(sureId: Int) {
-        val action = SureListFragmentDirections.actionTranslationFragmentToOriginalAyatFragment(sureId)
-        navController.navigate(action)
     }
 
     fun fillRecyclerView(s: Editable?) {

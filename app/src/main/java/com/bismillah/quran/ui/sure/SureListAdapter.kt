@@ -7,7 +7,7 @@ import com.bismillah.quran.callback.SureItemClickListener
 import com.bismillah.quran.data.model.Sure
 import com.bismillah.quran.extentions.inflate
 
-class SureListAdapter(private val itemClickListener: SureItemClickListener) : RecyclerView.Adapter<SureListViewHolder>() {
+class SureListAdapter(private val itemClickListener: SureItemClickListener, private val isOriginalTextNeeded: Boolean = true) : RecyclerView.Adapter<SureListViewHolder>() {
 
     var models: List<Sure> = listOf()
         set(value) {
@@ -23,7 +23,7 @@ class SureListAdapter(private val itemClickListener: SureItemClickListener) : Re
     override fun getItemCount(): Int = models.size
 
     override fun onBindViewHolder(holder: SureListViewHolder, position: Int) {
-        holder.populateModel(models[position], itemClickListener)
+        holder.populateModel(models[position], itemClickListener, isOriginalTextNeeded)
     }
 
 }

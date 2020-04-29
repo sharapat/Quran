@@ -9,6 +9,8 @@ import com.bismillah.quran.ui.ayat.AyatListViewModel
 import com.bismillah.quran.ui.ayatoriginal.OriginalAyatRVAdapter
 import com.bismillah.quran.ui.ayatoriginal.OriginalAyatViewModel
 import com.bismillah.quran.ui.explanation.ayat.AyatExplanationViewModel
+import com.bismillah.quran.ui.explanation.sure.SureExplanationListAdapter
+import com.bismillah.quran.ui.explanation.sure.SureExplanationViewModel
 import com.bismillah.quran.ui.sure.SureListViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -32,6 +34,7 @@ val dataModule = module {
 val adapterModule = module {
     single { AyatListAdapter(get()) }
     single { OriginalAyatRVAdapter(get()) }
+    single { SureExplanationListAdapter(get()) }
 }
 
 val viewModelModule = module {
@@ -39,4 +42,5 @@ val viewModelModule = module {
     viewModel { AyatListViewModel(get()) }
     viewModel { AyatExplanationViewModel(get()) }
     viewModel { OriginalAyatViewModel(get()) }
+    viewModel { SureExplanationViewModel(get()) }
 }
