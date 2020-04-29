@@ -51,13 +51,11 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
             activity?.onBackPressed()
         }
         btnPlus.setOnClickListener {
-            val currentSize = settings.getTextSize()
-            settings.setTextSize(currentSize + 2)
+            settings.increaseTextSize()
             adapter.update()
         }
         btnMinus.setOnClickListener {
-            val currentSize = settings.getTextSize()
-            settings.setTextSize(currentSize - 2)
+            settings.decreaseTextSize()
             adapter.update()
         }
     }

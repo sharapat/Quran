@@ -15,8 +15,8 @@ class SureListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    private val _translationList: MutableLiveData<List<Sure>> = MutableLiveData()
-    val translationList: LiveData<List<Sure>> = _translationList
+    private val _sureList: MutableLiveData<List<Sure>> = MutableLiveData()
+    val sureList: LiveData<List<Sure>> = _sureList
 
     fun getAllSureTranslations() {
         launch { getAllSureTranslationAsync() }
@@ -24,7 +24,7 @@ class SureListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
 
     private suspend fun getAllSureTranslationAsync() {
         withContext(Dispatchers.IO) {
-            _translationList.postValue(quranDao.getAllSure())
+            _sureList.postValue(quranDao.getAllSure())
         }
     }
 
@@ -34,7 +34,7 @@ class SureListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
 
     private suspend fun searchSureByWordSync(word: String) {
         withContext(Dispatchers.IO) {
-            _translationList.postValue(quranDao.searchSureByWord("$word%"))
+            _sureList.postValue(quranDao.searchSureByWord("$word%"))
         }
     }
 }

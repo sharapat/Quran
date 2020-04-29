@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/item_translation"
+        android:id="@+id/translationFragment"
         android:title="@string/translation"
         app:showAsAction="ifRoom"
         android:icon="@drawable/bg_item_translation"/>
 
     <item
-        android:id="@+id/item_explanation"
+        android:id="@+id/explanationSureListFragment"
         android:title="@string/explanation"
         app:showAsAction="always"
         android:icon="@drawable/bg_explanation_item"/>

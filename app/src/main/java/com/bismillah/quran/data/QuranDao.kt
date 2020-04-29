@@ -25,7 +25,10 @@ interface QuranDao {
     @Query("SELECT * FROM tusindirmeler WHERE number=:number")
     fun getExplanationsByNumber(number: Int): List<Explanation>
 
+    @Query("SELECT * FROM tusindirmeler WHERE sure=:sureId")
+    fun getExplanationsBySureId(sureId: Int): List<Explanation>
+
     @Query("SELECT * FROM texts WHERE title=:sureId")
-    fun getOriginalAyatListBySureId(sureId: Int) : List<QuranText>
+    fun getOriginalAyatListBySureId(sureId: Int): List<QuranText>
 
 }

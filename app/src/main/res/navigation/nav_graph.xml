@@ -39,6 +39,10 @@
             android:name="sureId"
             app:argType="integer"
             android:defaultValue="0" />
+        <argument
+            android:name="sureName"
+            app:argType="string" />
+
     </fragment>
     <fragment
         android:id="@+id/ayatExplanationFragment"
@@ -56,5 +60,28 @@
         <argument
             android:name="sureId"
             android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/explanationSureListFragment"
+        android:name="com.bismillah.quran.ui.explanation.sure.ExplanationSureListFragment"
+        android:label="SureExplanationFragment" >
+        <action
+            android:id="@+id/action_explanationSureListFragment_to_sureExplanationFragment"
+            app:destination="@id/sureExplanationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/sureExplanationFragment"
+        android:name="com.bismillah.quran.ui.explanation.sure.SureExplanationFragment"
+        android:label="SureExplanationFragment" >
+        <argument
+            android:name="sureId"
+            android:defaultValue="0" />
+        <argument
+            android:name="sureName"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -6,9 +6,10 @@ class Settings(private val preferences: SharedPreferences) {
     companion object {
         const val TEXT_SIZE = "TextSize"
         const val ARAB_TEXT_SIZE = "ArabTextSize"
+        const val STEP = 2
     }
 
-    fun setArabTextSize(size: Int) {
+    private fun setArabTextSize(size: Int) {
         if (size in 8..64) {
             preferences.edit().putInt(ARAB_TEXT_SIZE, size).apply()
         }
@@ -16,7 +17,25 @@ class Settings(private val preferences: SharedPreferences) {
 
     fun getArabTextSize() : Int = preferences.getInt(ARAB_TEXT_SIZE, 16)
 
-    fun setTextSize(size: Int) {
+    fun increaseArabTextSize() {
+        setArabTextSize(getArabTextSize()+STEP)
+    }
+
+    fun decreaseArabTextSize() {
+        setArabTextSize(getArabTextSize()-STEP)
+    }
+
+    fun increaseTextSize() {
+        val currentTextSize = getTextSize()
+        setTextSize(currentTextSize + STEP)
+    }
+
+    fun decreaseTextSize() {
+        val currentTextSize = getTextSize()
+        setTextSize(currentTextSize-STEP)
+    }
+
+    private fun setTextSize(size: Int) {
         if (size in 8..64) {
             preferences.edit().putInt(TEXT_SIZE, size).apply()
         }

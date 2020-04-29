@@ -27,7 +27,7 @@ class OriginalAyatFragment : BaseFragment(R.layout.fragment_ayat_original) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rvOriginalAyatList.adapter = adapter
+        recyclerView.adapter = adapter
         viewModel.getOriginalAyatListBySureId(safeArgs.sureId)
         viewModel.getSureById(safeArgs.sureId)
         viewModel.originalAyatList.observe(viewLifecycleOwner, Observer {
@@ -38,14 +38,12 @@ class OriginalAyatFragment : BaseFragment(R.layout.fragment_ayat_original) {
         })
 
         btnMinus.setOnClickListener {
-            val currentTextSize = settings.getArabTextSize()
-            settings.setArabTextSize(currentTextSize-1)
+            settings.decreaseArabTextSize()
             adapter.update()
         }
 
         btnPlus.setOnClickListener {
-            val currentTextSize = settings.getArabTextSize()
-            settings.setArabTextSize(currentTextSize+1)
+            settings.increaseArabTextSize()
             adapter.update()
         }
 

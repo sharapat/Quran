@@ -37,14 +37,12 @@ class AyatExplanationFragment : BaseFragment(R.layout.fragment_explanation_ayat)
             requireActivity().onBackPressed()
         }
         btnMinus.setOnClickListener {
-            val currentTextSize = settings.getTextSize()
-            settings.setTextSize(currentTextSize-1)
-            tvExplanationText.textSize = (currentTextSize-1).toFloat()
+            settings.decreaseTextSize()
+            tvExplanationText.textSize = settings.getTextSize().toFloat()
         }
         btnPlus.setOnClickListener {
-            val currentTextSize = settings.getTextSize()
-            settings.setTextSize(currentTextSize+1)
-            tvExplanationText.textSize = (currentTextSize+1).toFloat()
+            settings.increaseTextSize()
+            tvExplanationText.textSize = settings.getTextSize().toFloat()
         }
     }
 }
