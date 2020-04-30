@@ -16,7 +16,8 @@ class SureListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
         get() = Dispatchers.Main
 
     private val _sureList: MutableLiveData<List<Sure>> = MutableLiveData()
-    val sureList: LiveData<List<Sure>> = _sureList
+    val sureList: LiveData<List<Sure>>
+        get() = _sureList
 
     fun getAllSureTranslations() {
         launch { getAllSureTranslationAsync() }

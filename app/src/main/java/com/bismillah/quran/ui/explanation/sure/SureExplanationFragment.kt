@@ -1,7 +1,9 @@
 package com.bismillah.quran.ui.explanation.sure
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bismillah.quran.R
@@ -20,6 +22,7 @@ class SureExplanationFragment: BaseFragment(R.layout.fragment_ayat_original) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hideKeyboard(requireActivity())
         recyclerView.adapter = adapter
         tvToolbarTitle.text = safeArgs.sureName
         viewModel.getExplanationListBySureId(safeArgs.sureId)
@@ -37,5 +40,15 @@ class SureExplanationFragment: BaseFragment(R.layout.fragment_ayat_original) {
             settings.increaseTextSize()
             adapter.update()
         }
+    }
+
+    private fun hideKeyboard(activity: Activity) {
+        val imm: InputMethodManager =
+            activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = activity.currentFocus
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

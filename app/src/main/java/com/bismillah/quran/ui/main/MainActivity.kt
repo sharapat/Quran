@@ -15,8 +15,8 @@ class MainActivity : BaseActivity() {
         setUpBottomNavigation()
     }
 
-    fun setUpBottomNavigation() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
-        NavigationUI.setupWithNavController(bottomNavigation, (navHostFragment as NavHostFragment).navController)
+    private fun setUpBottomNavigation() {
+        val navHostFragment: NavHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
+        NavigationUI.setupWithNavController(bottomNavigation, navHostFragment.navController)
     }
 }

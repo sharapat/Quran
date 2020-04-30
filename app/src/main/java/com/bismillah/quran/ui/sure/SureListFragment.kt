@@ -3,6 +3,7 @@ package com.bismillah.quran.ui.sure
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -27,8 +28,6 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClic
         rvSure.adapter = adapter
         rvSure.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        fillRecyclerView(etSearch.text)
-
         viewModel.sureList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
         })
@@ -46,6 +45,11 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClic
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        fillRecyclerView(etSearch.text)
     }
 
     override fun onSureClick(sureId: Int, sureName: String) {

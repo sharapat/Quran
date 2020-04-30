@@ -28,8 +28,6 @@ class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list), S
         rvSure.adapter = adapter
         rvSure.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        fillRecyclerView(etSearch.text)
-
         viewModel.sureList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
         })
@@ -47,6 +45,11 @@ class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list), S
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        fillRecyclerView(etSearch.text)
     }
 
     override fun onSureClick(sureId: Int, sureName: String) {
