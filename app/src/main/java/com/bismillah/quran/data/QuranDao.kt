@@ -2,6 +2,7 @@ package com.bismillah.quran.data
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Update
 import com.bismillah.quran.data.model.Ayat
 import com.bismillah.quran.data.model.Explanation
 import com.bismillah.quran.data.model.QuranText
@@ -30,5 +31,14 @@ interface QuranDao {
 
     @Query("SELECT * FROM texts WHERE title=:sureId")
     fun getOriginalAyatListBySureId(sureId: Int): List<QuranText>
+
+    @Query("SELECT * FROM ayatlar WHERE is_favorite = 1")
+    fun getFavorites(): List<Ayat>
+
+    @Update
+    fun updateAyat(ayat: Ayat)
+
+    @Query("SELECT * FROM ayatlar WHERE id=:ayatId")
+    fun getAyatById(ayatId: Int): Ayat
 
 }

@@ -7,4 +7,6 @@
     <attr name="toolbarColor" format="color"/>
     <attr name="statusBarColor" format="color"/>
     <attr name="borderColor" format="color"/>
+    <attr name="popupColor" format="color"/>
+    <attr name="rippleColor" format="color"/>
 </resources>

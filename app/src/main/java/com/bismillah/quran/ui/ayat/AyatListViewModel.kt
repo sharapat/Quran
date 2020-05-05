@@ -37,6 +37,20 @@ class AyatListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
         }
     }
 
+    fun setFavorite(ayatId: Int) {
+        launch { setFavoriteAsync(ayatId) }
+    }
+
+    private suspend fun setFavoriteAsync(ayatId: Int) {
+        withContext(Dispatchers.IO) {
+            val ayat = quranDao.getAyatById(ayatId)
+            val sure = quranDao.getSureById(ayat.sureId)
+            ayat.isFavorite = 1
+            ayat.sureName = sure.name
+            quranDao.updateAyat(ayat)
+        }
+    }
+
     private suspend fun getAyatListAsync(sureId: Int) {
         withContext(Dispatchers.IO) {
             _ayatList.postValue(quranDao.getAllAyatBySureId(sureId))

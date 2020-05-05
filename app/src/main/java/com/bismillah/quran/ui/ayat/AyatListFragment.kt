@@ -1,9 +1,8 @@
 package com.bismillah.quran.ui.ayat
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
+import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -16,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_ayat_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.lang.Exception
 
 class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClickListener {
 
@@ -64,14 +64,30 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
         navController.navigate(action)
     }
 
-    private fun hideKeyboard(activity: Activity) {
-        val imm: InputMethodManager =
-            activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        var view = activity.currentFocus
-        if (view == null) {
-            view = View(activity)
+    override fun onItemClick(view: View, ayatId: Int) {
+        val popupMenu = PopupMenu(context, view)
+        try {
+            val field = popupMenu.javaClass.getDeclaredField("mPopup")
+            field.isAccessible = true
+            val menuPopupHelper = field.get(popupMenu)
+            val classPopupHelper = Class.forName(menuPopupHelper.javaClass.name)
+            val setForceIcons = classPopupHelper.getMethod("setForceShowIcon", Boolean::class.java)
+            setForceIcons.invoke(menuPopupHelper, true)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
+        val inflater = popupMenu.menuInflater
+        inflater.inflate(R.menu.menu_ayat_item, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.item_favorite -> {
+                    viewModel.setFavorite(ayatId)
+                    toastSH(getString(R.string.ayat_has_been_added_to_favorites))
+                    return@setOnMenuItemClickListener true
+                }
+                else -> return@setOnMenuItemClickListener false
+            }
+        }
+        popupMenu.show()
     }
-
 }

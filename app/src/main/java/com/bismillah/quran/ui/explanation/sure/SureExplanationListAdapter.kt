@@ -20,7 +20,7 @@ class SureExplanationListAdapter(private val settings: Settings) : RecyclerView.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SureExplanationViewHolder {
-        val view = parent.inflate(R.layout.item_ayat)
+        val view = parent.inflate(R.layout.simple_text)
         return SureExplanationViewHolder(view)
     }
 

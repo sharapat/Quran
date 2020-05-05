@@ -20,7 +20,7 @@ class OriginalAyatRVAdapter(private val settings: Settings) : RecyclerView.Adapt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OriginalAyatViewHolder {
-        val view = parent.inflate(R.layout.item_ayat)
+        val view = parent.inflate(R.layout.simple_text)
         return OriginalAyatViewHolder(view)
     }
 
