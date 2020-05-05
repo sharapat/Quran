@@ -17,6 +17,9 @@ class AyatListViewHolder(itemView: View, private val itemClickListener: AyatItem
     fun populateModel(ayat: Ayat, settings: Settings) {
         itemView.tvText.textSize = settings.getTextSize().toFloat()
         setTextViewHtml(itemView.tvText, ayat.text)
+        itemView.optionBtn.setOnClickListener {
+            itemClickListener?.onItemClick(itemView.optionBtn, ayat.id)
+        }
     }
 
     private fun makeLinkClickable(strBuilder: SpannableStringBuilder, span: URLSpan) {

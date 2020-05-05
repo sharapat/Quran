@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tvSureName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/textColor"
+        android:textSize="@dimen/text_size_standard"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAyatText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/textColor"
+        android:textSize="@dimen/text_size_standard"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        android:textColorLink="@color/color_link"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSureName"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/optionBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:background="@drawable/ripple_by_theme"
+        android:contentDescription="@string/todo"
+        android:padding="@dimen/margin_small"
+        android:src="@drawable/ic_more_horiz_black_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAyatText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

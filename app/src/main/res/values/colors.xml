@@ -9,4 +9,5 @@
     <color name="transparent_white">#A3FFFFFF</color>
     <color name="transparent_dark">#A4000000</color>
     <color name="color_link">#E3004E</color>
+    <color name="popupMenuDark">#303030</color>
 </resources>

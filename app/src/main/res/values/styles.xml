@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppThemeDark" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="AppThemeDark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorStatusBarDark</item>
@@ -32,6 +32,8 @@
         <item name="toolbarColor">@color/colorPrimary</item>
         <item name="statusBarBackground">@color/colorPrimaryDark</item>
         <item name="borderColor">@android:color/darker_gray</item>
+        <item name="popupColor">@color/white</item>
+        <item name="rippleColor">@color/transparent_dark</item>
     </style>
 
     <style name="DarkTheme" parent="AppThemeDark">
@@ -44,6 +46,7 @@
         <item name="toolbarColor">#282828</item>
         <item name="statusBarBackground">#131313</item>
         <item name="borderColor">#3E3E3E</item>
+        <item name="popupColor">@color/popupMenuDark</item>
+        <item name="rippleColor">@color/transparent_white</item>
     </style>
-
 </resources>

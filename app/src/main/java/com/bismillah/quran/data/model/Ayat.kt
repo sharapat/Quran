@@ -16,6 +16,12 @@ data class Ayat(
     @ColumnInfo(name = "lower")
     var lower: String,
 
+    @ColumnInfo(name = "is_favorite")
+    var isFavorite: Int? = 0,
+
+    @ColumnInfo(name = "sure_name")
+    var sureName: String?="",
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int

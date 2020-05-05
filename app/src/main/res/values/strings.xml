@@ -10,4 +10,9 @@
     <string name="decrease">Decrease</string>
     <string name="favorites">Сайландылар</string>
     <string name="additional">Қосымша</string>
+    <string name="share">Бөлисиў</string>
+    <string name="add_to_favorite">Сайларға қосыў</string>
+    <string name="removeFavorite">Сайландылардан өшириў</string>
+    <string name="empty_favorites_text">Сайландылар бос</string>
+    <string name="ayat_has_been_added_to_favorites">Аят сайландылар дизимине қосылды</string>
 </resources>
