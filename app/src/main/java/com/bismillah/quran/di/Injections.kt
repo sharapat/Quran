@@ -27,7 +27,8 @@ val dataModule = module {
                 .build()
     }
     single { get<QuranDatabase>().quranDao() }
-    single { androidApplication().applicationContext.getSharedPreferences("com.bismillah.quran.preferences", Context.MODE_PRIVATE) }
+    single { androidApplication().applicationContext
+        .getSharedPreferences("com.bismillah.quran.preferences", Context.MODE_PRIVATE) }
     single { Settings(get()) }
 }
 

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
 
     <RelativeLayout
         android:id="@+id/appBarLayout"
@@ -70,17 +71,11 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"/>
 
-        <TextView
-            android:id="@+id/tvExplanationText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_standard"
-            android:textSize="@dimen/text_size_standard"
-            android:textColor="@android:color/background_dark"/>
-
-    </ScrollView>
 </LinearLayout>

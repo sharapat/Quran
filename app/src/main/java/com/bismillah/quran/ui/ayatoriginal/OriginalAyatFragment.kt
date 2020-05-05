@@ -9,11 +9,11 @@ import androidx.navigation.fragment.navArgs
 import com.bismillah.quran.R
 import com.bismillah.quran.Settings
 import com.bismillah.quran.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_ayat_original.*
+import kotlinx.android.synthetic.main.fragment_simple_reading_list.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class OriginalAyatFragment : BaseFragment(R.layout.fragment_ayat_original) {
+class OriginalAyatFragment : BaseFragment(R.layout.fragment_simple_reading_list) {
 
     private val viewModel : OriginalAyatViewModel by viewModel()
     private val settings: Settings by inject()

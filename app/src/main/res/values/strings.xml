@@ -8,4 +8,6 @@
     <string name="todo">TODO</string>
     <string name="increase">Increase</string>
     <string name="decrease">Decrease</string>
+    <string name="favorites">Сайландылар</string>
+    <string name="additional">Қосымша</string>
 </resources>
