@@ -19,6 +19,11 @@ class AyatExplanationFragment : BaseFragment(R.layout.fragment_simple_reading_li
     private val safeArgs: AyatExplanationFragmentArgs by navArgs()
     private val adapter: SureExplanationListAdapter by inject()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().actionBar?.hide()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = adapter

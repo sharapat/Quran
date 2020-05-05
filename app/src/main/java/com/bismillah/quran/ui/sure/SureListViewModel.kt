@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bismillah.quran.data.QuranDao
 import com.bismillah.quran.data.model.Sure
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class SureListViewModel(private val quranDao: QuranDao) : ViewModel(), CoroutineScope {
@@ -25,6 +22,7 @@ class SureListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
 
     private suspend fun getAllSureTranslationAsync() {
         withContext(Dispatchers.IO) {
+            delay(150)
             _sureList.postValue(quranDao.getAllSure())
         }
     }

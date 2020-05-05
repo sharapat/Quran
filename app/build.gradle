@@ -45,7 +45,7 @@ ext {
     koin_version = '2.1.5'
     adapter_rxjava_version = '2.5.0'
     room_version = "2.2.5"
-    nav_version = "2.3.0-alpha05"
+    nav_version = "2.3.0-alpha06"
 }
 
 dependencies {
