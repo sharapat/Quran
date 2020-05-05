@@ -4,14 +4,26 @@
     <item
         android:id="@+id/translationFragment"
         android:title="@string/translation"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:icon="@drawable/bg_item_translation"/>
 
     <item
         android:id="@+id/explanationSureListFragment"
         android:title="@string/explanation"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/bg_explanation_item"/>
+
+    <item
+        android:id="@+id/favoriteListFragment"
+        android:title="@string/favorites"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_favorite_black_24dp"/>
+
+    <item
+        android:id="@+id/additionalInfoFragment"
+        android:title="@string/additional"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_description_black_24dp"/>
 
     <item
         android:id="@+id/item_search"
