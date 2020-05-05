@@ -1,24 +1,49 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeLight" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="AppThemeDark" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorStatusBarDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="ToolBarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:textColorPrimary">@color/white</item>
-        <item name="colorControlNormal">@color/colorPrimary</item>
         <item name="selectableItemBackground">?android:selectableItemBackground</item>
         <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
         <item name="colorControlHighlight">@android:color/darker_gray</item>
+    </style>
+
+    <style name="LightTheme" parent="AppThemeLight">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="textColor">#ff000000</item>
+        <item name="metaTextColor">#606060</item>
+        <item name="bgColor">#ffffff</item>
+        <item name="secondaryBgColor">#ffffff</item>
+        <item name="toolbarColor">@color/colorPrimary</item>
+        <item name="statusBarBackground">@color/colorPrimaryDark</item>
+        <item name="borderColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="DarkTheme" parent="AppThemeDark">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="textColor">#ffffff</item>
+        <item name="metaTextColor">#aeaeae</item>
+        <item name="bgColor">#282828</item>
+        <item name="secondaryBgColor">#3E3E3E</item>
+        <item name="toolbarColor">#282828</item>
+        <item name="statusBarBackground">#131313</item>
+        <item name="borderColor">#3E3E3E</item>
     </style>
 
 </resources>

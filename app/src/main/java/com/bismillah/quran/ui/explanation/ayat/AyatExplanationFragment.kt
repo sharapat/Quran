@@ -9,6 +9,7 @@ import com.bismillah.quran.Settings
 import com.bismillah.quran.ui.base.BaseFragment
 import com.bismillah.quran.ui.explanation.sure.SureExplanationListAdapter
 import kotlinx.android.synthetic.main.fragment_simple_reading_list.*
+import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -16,7 +17,6 @@ class AyatExplanationFragment : BaseFragment(R.layout.fragment_simple_reading_li
 
     private val viewModel: AyatExplanationViewModel by viewModel()
     private val safeArgs: AyatExplanationFragmentArgs by navArgs()
-    private val settings: Settings by inject()
     private val adapter: SureExplanationListAdapter by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -4,10 +4,21 @@ import android.content.SharedPreferences
 
 class Settings(private val preferences: SharedPreferences) {
     companion object {
+        const val DARK_MODE = "darkMode"
         const val TEXT_SIZE = "TextSize"
         const val ARAB_TEXT_SIZE = "ArabTextSize"
         const val STEP = 2
     }
+
+    fun changeAppMode() {
+        if (isAppDarkMode()) {
+            preferences.edit().putBoolean(DARK_MODE, false).apply()
+        } else {
+            preferences.edit().putBoolean(DARK_MODE, true).apply()
+        }
+    }
+
+    fun isAppDarkMode() : Boolean = preferences.getBoolean(DARK_MODE, false)
 
     private fun setArabTextSize(size: Int) {
         if (size in 8..64) {

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/margin_standard"
     android:textSize="@dimen/text_size_standard"
-    android:textColor="@android:color/background_dark"
+    android:textColor="?attr/textColor"
     android:drawablePadding="16dp"
     android:textColorLink="@color/color_link"
     xmlns:android="http://schemas.android.com/apk/res/android" />

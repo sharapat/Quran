@@ -7,16 +7,15 @@ import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bismillah.quran.R
-import com.bismillah.quran.Settings
 import com.bismillah.quran.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_simple_reading_list.*
+import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class OriginalAyatFragment : BaseFragment(R.layout.fragment_simple_reading_list) {
 
     private val viewModel : OriginalAyatViewModel by viewModel()
-    private val settings: Settings by inject()
     private val safeArgs: OriginalAyatFragmentArgs by navArgs()
     private val adapter: OriginalAyatRVAdapter by inject()
 

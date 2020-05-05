@@ -10,10 +10,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
-import com.bismillah.quran.Settings
 import com.bismillah.quran.callback.AyatItemClickListener
 import com.bismillah.quran.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_ayat_list.*
+import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -21,7 +21,6 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
 
     private val viewModel: AyatListViewModel by viewModel()
     private val adapter: AyatListAdapter by inject()
-    private val settings: Settings by inject()
     private val safeArgs: AyatListFragmentArgs by navArgs()
     private lateinit var navController: NavController
     private lateinit var sureName: String

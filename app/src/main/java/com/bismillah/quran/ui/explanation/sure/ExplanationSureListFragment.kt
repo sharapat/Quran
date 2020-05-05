@@ -12,9 +12,11 @@ import com.bismillah.quran.R
 import com.bismillah.quran.callback.SureItemClickListener
 import com.bismillah.quran.extentions.visibility
 import com.bismillah.quran.ui.base.BaseFragment
+import com.bismillah.quran.ui.main.MainActivity
 import com.bismillah.quran.ui.sure.SureListAdapter
 import com.bismillah.quran.ui.sure.SureListViewModel
 import kotlinx.android.synthetic.main.fragment_sure_list.*
+import kotlinx.android.synthetic.main.main_toolbar.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClickListener {
@@ -24,6 +26,7 @@ class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list), S
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setModeBtnImage()
         navController = Navigation.findNavController(view)
         rvSure.adapter = adapter
         rvSure.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
@@ -31,6 +34,11 @@ class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list), S
         viewModel.sureList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
         })
+
+        btnMode.setOnClickListener {
+            settings.changeAppMode()
+            (requireActivity() as MainActivity).updateThemeAndRecreateActivity()
+        }
 
         btnClearSearchText.setOnClickListener {
             etSearch.text.clear()
@@ -45,6 +53,14 @@ class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list), S
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
+    }
+
+    private fun setModeBtnImage() {
+        if (settings.isAppDarkMode()) {
+            btnMode.setImageResource(R.drawable.sun)
+        } else {
+            btnMode.setImageResource(R.drawable.moon)
+        }
     }
 
     override fun onStart() {
