@@ -21,7 +21,7 @@
 
     <item
         android:id="@+id/infoListFragment"
-        android:title="@string/additional"
+        android:title="@string/information"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_description_black_24dp"/>
 
