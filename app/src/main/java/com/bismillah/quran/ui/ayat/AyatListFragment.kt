@@ -1,8 +1,11 @@
 package com.bismillah.quran.ui.ayat
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -46,6 +49,9 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
         viewModel.ayatList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
         })
+        viewModel.selectedAyat.observe(viewLifecycleOwner, Observer { ayat->
+            goToShare(ayat.text)
+        })
         backButton.setOnClickListener {
             activity?.onBackPressed()
         }
@@ -85,9 +91,49 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
                     toastSH(getString(R.string.ayat_has_been_added_to_favorites))
                     return@setOnMenuItemClickListener true
                 }
+                R.id.item_share -> {
+                    viewModel.getSelectedAyat(ayatId)
+                    return@setOnMenuItemClickListener true
+                }
                 else -> return@setOnMenuItemClickListener false
             }
         }
         popupMenu.show()
+    }
+
+    private fun goToShare(ayatText: String) {
+        val ayatNumber = getNumberFromAyatText(ayatText)
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_SUBJECT, getShareSubjectText(ayatNumber))
+        intent.putExtra(Intent.EXTRA_TEXT, getAyatTextWithoutNumber(ayatText))
+        startActivity(Intent.createChooser(intent, resources.getString(R.string.share_ayat)))
+    }
+
+    private fun getShareSubjectText(ayatNumber: Int): String {
+        if (ayatNumber == 0) return ""
+        val sure = viewModel.currentSure.value
+        return "${sure?.number} - ${sure?.name}, $ayatNumber-аят"
+    }
+
+    private fun getAyatTextWithoutNumber(ayatText: String) : String {
+        val number = ayatText.substring(0, ayatText.indexOf('.'))
+        var result = if (number.isDigitsOnly()) {
+            ayatText.substring(ayatText.indexOf('.') + 2, ayatText.length)
+        } else ayatText
+        while(result.indexOf("<sup>") >= 0) {
+            result = result.removeRange(result.indexOf("<sup>"), result.indexOf("</sup>")+6)
+        }
+        return result
+    }
+
+    private fun getNumberFromAyatText(ayatText: String) : Int {
+        if (ayatText.indexOf('.') < 0) return 0
+        val number = ayatText.substring(0, ayatText.indexOf('.'))
+        return if (number.isDigitsOnly()) {
+            number.toInt()
+        } else {
+            0
+        }
     }
 }

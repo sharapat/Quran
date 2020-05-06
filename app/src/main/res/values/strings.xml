@@ -15,4 +15,5 @@
     <string name="removeFavorite">Сайландылардан өшириў</string>
     <string name="empty_favorites_text">Сайландылар бос</string>
     <string name="ayat_has_been_added_to_favorites">Аят сайландылар дизимине қосылды</string>
+    <string name="share_ayat">Аятты бөлисиў</string>
 </resources>
