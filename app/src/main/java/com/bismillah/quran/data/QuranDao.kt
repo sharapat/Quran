@@ -3,10 +3,7 @@ package com.bismillah.quran.data
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Update
-import com.bismillah.quran.data.model.Ayat
-import com.bismillah.quran.data.model.Explanation
-import com.bismillah.quran.data.model.QuranText
-import com.bismillah.quran.data.model.Sure
+import com.bismillah.quran.data.model.*
 
 @Dao
 interface QuranDao {
@@ -41,4 +38,9 @@ interface QuranDao {
     @Query("SELECT * FROM ayatlar WHERE id=:ayatId")
     fun getAyatById(ayatId: Int): Ayat
 
+    @Query("SELECT * FROM qosimsha")
+    fun getInfoTitles(): List<Info>
+
+    @Query("SELECT * FROM qosimsha_text WHERE qosimsha=:infoTitleId")
+    fun getInfoByTitleIf(infoTitleId: Int) : List<InfoText>
 }

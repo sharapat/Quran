@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/tvInfoTitle"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
+    android:textSize="@dimen/text_size_standard"
+    android:textColor="?attr/textColor"
+    android:padding="@dimen/margin_standard"
+    android:background="?android:attr/selectableItemBackground"/>

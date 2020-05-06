@@ -10,7 +10,7 @@
 
     <style name="AppThemeDark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">?attr/toolbarColor</item>
         <item name="colorPrimaryDark">@color/colorStatusBarDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>

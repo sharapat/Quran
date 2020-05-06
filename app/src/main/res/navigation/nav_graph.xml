@@ -96,4 +96,28 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+    <fragment
+        android:id="@+id/infoListFragment"
+        android:name="com.bismillah.quran.ui.infolist.InfoListFragment"
+        android:label="InfoListFragment" >
+        <action
+            android:id="@+id/action_infoListFragment_to_infoTextFragment"
+            app:destination="@id/infoTextFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/infoTextFragment"
+        android:name="com.bismillah.quran.ui.info.InfoTextFragment"
+        android:label="InfoTextFragment" >
+        <argument
+            android:name="infoTitleId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="titleName"
+            app:argType="string" />
+    </fragment>
 </navigation>

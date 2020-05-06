@@ -26,6 +26,7 @@ class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list), S
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hideKeyboard(requireActivity())
         setModeBtnImage()
         navController = Navigation.findNavController(view)
         rvSure.adapter = adapter
