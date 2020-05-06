@@ -13,6 +13,9 @@ import com.bismillah.quran.ui.explanation.sure.SureExplanationListAdapter
 import com.bismillah.quran.ui.explanation.sure.SureExplanationViewModel
 import com.bismillah.quran.ui.favorites.FavoriteListAdapter
 import com.bismillah.quran.ui.favorites.FavoriteListViewModel
+import com.bismillah.quran.ui.info.InfoTextAdapter
+import com.bismillah.quran.ui.info.InfoViewModel
+import com.bismillah.quran.ui.infolist.InfoListViewModel
 import com.bismillah.quran.ui.sure.SureListViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -39,6 +42,7 @@ val adapterModule = module {
     single { OriginalAyatRVAdapter(get()) }
     single { SureExplanationListAdapter(get()) }
     single { FavoriteListAdapter(get()) }
+    single { InfoTextAdapter(get()) }
 }
 
 val viewModelModule = module {
@@ -48,4 +52,6 @@ val viewModelModule = module {
     viewModel { OriginalAyatViewModel(get()) }
     viewModel { SureExplanationViewModel(get()) }
     viewModel { FavoriteListViewModel(get()) }
+    viewModel { InfoListViewModel(get()) }
+    viewModel { InfoViewModel(get()) }
 }

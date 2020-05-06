@@ -13,7 +13,9 @@ import com.bismillah.quran.callback.AyatItemClickListener
 import com.bismillah.quran.data.model.Ayat
 import kotlinx.android.synthetic.main.item_ayat.view.*
 
-class AyatListViewHolder(itemView: View, private val itemClickListener: AyatItemClickListener?) : RecyclerView.ViewHolder(itemView) {
+class AyatListViewHolder(itemView: View, private val itemClickListener: AyatItemClickListener?) :
+    RecyclerView.ViewHolder(itemView) {
+
     fun populateModel(ayat: Ayat, settings: Settings) {
         itemView.tvText.textSize = settings.getTextSize().toFloat()
         setTextViewHtml(itemView.tvText, ayat.text)
