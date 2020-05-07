@@ -49,9 +49,6 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
         viewModel.ayatList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
         })
-        viewModel.selectedAyat.observe(viewLifecycleOwner, Observer { ayat->
-            goToShare(ayat.text)
-        })
         backButton.setOnClickListener {
             activity?.onBackPressed()
         }
@@ -93,6 +90,9 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
                 }
                 R.id.item_share -> {
                     viewModel.getSelectedAyat(ayatId)
+                    viewModel.selectedAyat.observe(viewLifecycleOwner, Observer { ayat->
+                        goToShare(ayat.text)
+                    })
                     return@setOnMenuItemClickListener true
                 }
                 else -> return@setOnMenuItemClickListener false
@@ -102,21 +102,21 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
     }
 
     private fun goToShare(ayatText: String) {
-        val ayatNumber = getNumberFromAyatText(ayatText)
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_SUBJECT, getShareSubjectText(ayatNumber))
         intent.putExtra(Intent.EXTRA_TEXT, getAyatTextWithoutNumber(ayatText))
         startActivity(Intent.createChooser(intent, resources.getString(R.string.share_ayat)))
+        viewModel.selectedAyat.removeObservers(viewLifecycleOwner)
     }
 
     private fun getShareSubjectText(ayatNumber: Int): String {
         if (ayatNumber == 0) return ""
         val sure = viewModel.currentSure.value
-        return "${sure?.number} - ${sure?.name}, $ayatNumber-аят"
+        return "${getString(R.string.app_name)}\n${sure?.number} - ${sure?.name}, $ayatNumber-аят:"
     }
 
     private fun getAyatTextWithoutNumber(ayatText: String) : String {
+        val subject = getShareSubjectText(getNumberFromAyatText(ayatText))
         val number = ayatText.substring(0, ayatText.indexOf('.'))
         var result = if (number.isDigitsOnly()) {
             ayatText.substring(ayatText.indexOf('.') + 2, ayatText.length)
@@ -124,7 +124,7 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
         while(result.indexOf("<sup>") >= 0) {
             result = result.removeRange(result.indexOf("<sup>"), result.indexOf("</sup>")+6)
         }
-        return result
+        return "$subject\n\n$result"
     }
 
     private fun getNumberFromAyatText(ayatText: String) : Int {
