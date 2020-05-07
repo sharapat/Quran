@@ -1,4 +1,4 @@
-package com.bismillah.quran.ui.ayatoriginal
+package com.bismillah.quran.ui.translation.original
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.bismillah.quran.ui.info
+package com.bismillah.quran.ui.information.content
 
 import android.view.View
 import android.view.ViewGroup

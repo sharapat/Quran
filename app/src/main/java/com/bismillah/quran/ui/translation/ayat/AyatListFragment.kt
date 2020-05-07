@@ -1,8 +1,7 @@
-package com.bismillah.quran.ui.ayat
+package com.bismillah.quran.ui.translation.ayat
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
 import androidx.core.text.isDigitsOnly
@@ -13,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
 import com.bismillah.quran.callback.AyatItemClickListener
-import com.bismillah.quran.ui.base.BaseFragment
+import com.bismillah.quran.core.BaseFragment
 import kotlinx.android.synthetic.main.fragment_ayat_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
@@ -42,6 +41,9 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
         val sureId = safeArgs.sureId
         viewModel.getAyatList(sureId)
         viewModel.getSureById(sureId)
+        viewModel.selectedAyat.observe(viewLifecycleOwner, Observer { ayat->
+            goToShare(ayat.text)
+        })
         viewModel.currentSure.observe(viewLifecycleOwner, Observer {
             tvToolbarTitle.text = it.name
             sureName = it.name
@@ -90,9 +92,6 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
                 }
                 R.id.item_share -> {
                     viewModel.getSelectedAyat(ayatId)
-                    viewModel.selectedAyat.observe(viewLifecycleOwner, Observer { ayat->
-                        goToShare(ayat.text)
-                    })
                     return@setOnMenuItemClickListener true
                 }
                 else -> return@setOnMenuItemClickListener false
@@ -106,7 +105,6 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
         intent.type = "text/plain"
         intent.putExtra(Intent.EXTRA_TEXT, getAyatTextWithoutNumber(ayatText))
         startActivity(Intent.createChooser(intent, resources.getString(R.string.share_ayat)))
-        viewModel.selectedAyat.removeObservers(viewLifecycleOwner)
     }
 
     private fun getShareSubjectText(ayatNumber: Int): String {

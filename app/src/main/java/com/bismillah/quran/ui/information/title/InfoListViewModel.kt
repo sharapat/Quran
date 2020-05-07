@@ -1,4 +1,4 @@
-package com.bismillah.quran.ui.infolist
+package com.bismillah.quran.ui.information.title
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

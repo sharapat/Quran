@@ -1,4 +1,4 @@
-package com.bismillah.quran.ui.ayat
+package com.bismillah.quran.ui.translation.ayat
 
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod

@@ -5,7 +5,7 @@
     app:startDestination="@id/translationFragment">
     <fragment
         android:id="@+id/translationFragment"
-        android:name="com.bismillah.quran.ui.sure.SureListFragment"
+        android:name="com.bismillah.quran.ui.translation.sure.SureListFragment"
         android:label="TranslationFragment">
         <action
             android:id="@+id/action_translationFragment_to_ayatListFragment"
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/ayatListFragment"
-        android:name="com.bismillah.quran.ui.ayat.AyatListFragment"
+        android:name="com.bismillah.quran.ui.translation.ayat.AyatListFragment"
         android:label="AyatListFragment" >
 
         <action
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/originalAyatFragment"
-        android:name="com.bismillah.quran.ui.ayatoriginal.OriginalAyatFragment"
+        android:name="com.bismillah.quran.ui.translation.original.OriginalAyatFragment"
         android:label="OriginalAyatFragment" >
         <argument
             android:name="sureId"
@@ -98,7 +98,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoListFragment"
-        android:name="com.bismillah.quran.ui.infolist.InfoListFragment"
+        android:name="com.bismillah.quran.ui.information.title.InfoListFragment"
         android:label="InfoListFragment" >
         <action
             android:id="@+id/action_infoListFragment_to_infoTextFragment"
@@ -110,7 +110,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoTextFragment"
-        android:name="com.bismillah.quran.ui.info.InfoTextFragment"
+        android:name="com.bismillah.quran.ui.information.content.InfoTextFragment"
         android:label="InfoTextFragment" >
         <argument
             android:name="infoTitleId"

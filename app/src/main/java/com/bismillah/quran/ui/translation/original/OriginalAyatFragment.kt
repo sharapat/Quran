@@ -1,11 +1,11 @@
-package com.bismillah.quran.ui.ayatoriginal
+package com.bismillah.quran.ui.translation.original
 
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bismillah.quran.R
-import com.bismillah.quran.ui.base.BaseFragment
+import com.bismillah.quran.core.BaseFragment
 import kotlinx.android.synthetic.main.fragment_simple_reading_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject

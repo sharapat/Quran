@@ -1,4 +1,4 @@
-package com.bismillah.quran.ui.infolist
+package com.bismillah.quran.ui.information.title
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
 import com.bismillah.quran.callback.InfoItemClickListener
-import com.bismillah.quran.ui.base.BaseFragment
+import com.bismillah.quran.core.BaseFragment
 import com.bismillah.quran.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_info.*
 import kotlinx.android.synthetic.main.main_toolbar.*

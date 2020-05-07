@@ -5,7 +5,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.bismillah.quran.R
 import com.bismillah.quran.Settings
-import com.bismillah.quran.ui.base.BaseActivity
+import com.bismillah.quran.core.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 

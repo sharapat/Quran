@@ -1,8 +1,9 @@
-package com.bismillah.quran.ui.ayat
+package com.bismillah.quran.ui.translation.ayat
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bismillah.quran.core.SingleLiveEvent
 import com.bismillah.quran.data.QuranDao
 import com.bismillah.quran.data.model.Ayat
 import com.bismillah.quran.data.model.Sure
@@ -24,7 +25,7 @@ class AyatListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
     val currentSure: LiveData<Sure>
         get() = _currentSure
 
-    private var _selectedAyat: MutableLiveData<Ayat> = MutableLiveData()
+    private var _selectedAyat: SingleLiveEvent<Ayat> = SingleLiveEvent()
     val selectedAyat: LiveData<Ayat>
         get() = _selectedAyat
 
