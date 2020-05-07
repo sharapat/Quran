@@ -1,4 +1,4 @@
-package com.bismillah.quran.ui.base
+package com.bismillah.quran.core
 
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity

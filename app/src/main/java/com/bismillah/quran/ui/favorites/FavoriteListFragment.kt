@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
 import com.bismillah.quran.callback.FavoriteAyatItemClickListener
 import com.bismillah.quran.extentions.visibility
-import com.bismillah.quran.ui.base.BaseFragment
+import com.bismillah.quran.core.BaseFragment
 import com.bismillah.quran.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.main_toolbar.*

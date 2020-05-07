@@ -1,8 +1,9 @@
-package com.bismillah.quran.ui.ayat
+package com.bismillah.quran.ui.translation.ayat
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bismillah.quran.core.SingleLiveEvent
 import com.bismillah.quran.data.QuranDao
 import com.bismillah.quran.data.model.Ayat
 import com.bismillah.quran.data.model.Sure
@@ -21,7 +22,12 @@ class AyatListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
         get() = _ayatList
 
     private var _currentSure: MutableLiveData<Sure> = MutableLiveData()
-    val currentSure: LiveData<Sure> = _currentSure
+    val currentSure: LiveData<Sure>
+        get() = _currentSure
+
+    private var _selectedAyat: SingleLiveEvent<Ayat> = SingleLiveEvent()
+    val selectedAyat: LiveData<Ayat>
+        get() = _selectedAyat
 
     fun getSureById(sureId: Int) {
         launch { getSureByIdAsync(sureId) }
@@ -41,13 +47,23 @@ class AyatListViewModel(private val quranDao: QuranDao) : ViewModel(), Coroutine
         launch { setFavoriteAsync(ayatId) }
     }
 
+    fun getSelectedAyat(ayatId: Int) {
+        launch { getSelectedAyatAsync(ayatId) }
+    }
+
     private suspend fun setFavoriteAsync(ayatId: Int) {
         withContext(Dispatchers.IO) {
             val ayat = quranDao.getAyatById(ayatId)
-            val sure = quranDao.getSureById(ayat.sureId)
             ayat.isFavorite = 1
-            ayat.sureName = sure.name
+            ayat.sureName = currentSure.value?.name
             quranDao.updateAyat(ayat)
+        }
+    }
+
+    private suspend fun getSelectedAyatAsync(ayatId: Int) {
+        withContext(Dispatchers.IO) {
+            val ayat = quranDao.getAyatById(ayatId)
+            _selectedAyat.postValue(ayat)
         }
     }
 

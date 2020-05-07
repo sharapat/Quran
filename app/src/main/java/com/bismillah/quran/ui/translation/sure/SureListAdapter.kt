@@ -1,4 +1,4 @@
-package com.bismillah.quran.ui.sure
+package com.bismillah.quran.ui.translation.sure
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

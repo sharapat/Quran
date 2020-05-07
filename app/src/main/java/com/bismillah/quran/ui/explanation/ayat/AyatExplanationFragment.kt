@@ -5,8 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bismillah.quran.R
-import com.bismillah.quran.Settings
-import com.bismillah.quran.ui.base.BaseFragment
+import com.bismillah.quran.core.BaseFragment
 import com.bismillah.quran.ui.explanation.sure.SureExplanationListAdapter
 import kotlinx.android.synthetic.main.fragment_simple_reading_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*

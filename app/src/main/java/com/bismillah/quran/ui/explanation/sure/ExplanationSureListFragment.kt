@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
 import com.bismillah.quran.callback.SureItemClickListener
 import com.bismillah.quran.extentions.visibility
-import com.bismillah.quran.ui.base.BaseFragment
+import com.bismillah.quran.core.BaseFragment
 import com.bismillah.quran.ui.main.MainActivity
-import com.bismillah.quran.ui.sure.SureListAdapter
-import com.bismillah.quran.ui.sure.SureListViewModel
+import com.bismillah.quran.ui.translation.sure.SureListAdapter
+import com.bismillah.quran.ui.translation.sure.SureListViewModel
 import kotlinx.android.synthetic.main.fragment_sure_list.*
 import kotlinx.android.synthetic.main.main_toolbar.*
 import org.koin.android.viewmodel.ext.android.viewModel

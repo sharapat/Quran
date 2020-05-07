@@ -1,16 +1,12 @@
-package com.bismillah.quran.ui.info
+package com.bismillah.quran.ui.information.content
 
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.util.Log
 import android.view.View
-import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bismillah.quran.R
 import com.bismillah.quran.data.model.InfoText
-import com.bismillah.quran.ui.base.BaseFragment
+import com.bismillah.quran.core.BaseFragment
 import kotlinx.android.synthetic.main.fragment_simple_reading_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
