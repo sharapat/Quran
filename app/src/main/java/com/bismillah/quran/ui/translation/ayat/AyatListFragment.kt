@@ -9,17 +9,17 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
-import com.bismillah.quran.callback.AyatItemClickListener
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.core.extentions.addVertDivider
+import com.bismillah.quran.core.extentions.onClick
 import kotlinx.android.synthetic.main.fragment_ayat_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.lang.Exception
 
-class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClickListener {
+class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
 
     private val viewModel: AyatListViewModel by viewModel()
     private val adapter: AyatListAdapter by inject()
@@ -35,9 +35,10 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        adapter.itemClickListener = this
+        adapter.setOnLinkClickListener(onLinkClick)
+        adapter.setOnOptionsClickListener(onOptionsBtnClick)
         rvAyat.adapter = adapter
-        rvAyat.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        rvAyat.addVertDivider(context)
         val sureId = safeArgs.sureId
         viewModel.getAyatList(sureId)
         viewModel.getSureById(sureId)
@@ -51,25 +52,25 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
         viewModel.ayatList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
         })
-        backButton.setOnClickListener {
+        backButton.onClick {
             activity?.onBackPressed()
         }
-        btnPlus.setOnClickListener {
+        btnPlus.onClick {
             settings.increaseTextSize()
             adapter.update()
         }
-        btnMinus.setOnClickListener {
+        btnMinus.onClick {
             settings.decreaseTextSize()
             adapter.update()
         }
     }
 
-    override fun onLinkClick(number: Int) {
+    private val onLinkClick = { number: Int ->
         val action = AyatListFragmentDirections.actionAyatListFragment(number, sureName)
         navController.navigate(action)
     }
 
-    override fun onItemClick(view: View, ayatId: Int) {
+    private val onOptionsBtnClick = { view: View, ayatId: Int ->
         val popupMenu = PopupMenu(context, view)
         try {
             val field = popupMenu.javaClass.getDeclaredField("mPopup")

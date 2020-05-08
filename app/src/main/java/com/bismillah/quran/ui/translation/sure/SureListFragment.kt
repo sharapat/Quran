@@ -7,40 +7,41 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
-import com.bismillah.quran.callback.SureItemClickListener
-import com.bismillah.quran.extentions.visibility
+import com.bismillah.quran.core.extentions.visibility
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.core.extentions.addVertDivider
+import com.bismillah.quran.core.extentions.onClick
 import com.bismillah.quran.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_sure_list.*
 import kotlinx.android.synthetic.main.main_toolbar.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class SureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClickListener {
+class SureListFragment : BaseFragment(R.layout.fragment_sure_list) {
 
     private val viewModel: SureListViewModel by viewModel()
-    private val adapter: SureListAdapter = SureListAdapter(this)
+    private val adapter: SureListAdapter = SureListAdapter(true)
     private lateinit var navController: NavController
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setModeBtnImage()
         navController = Navigation.findNavController(view)
+        adapter.setOnItemClickListener(onSureItemClick)
+        adapter.setOnOriginalSureClickListener(onOriginalSureClick)
         rvSure.adapter = adapter
-        rvSure.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        rvSure.addVertDivider(context)
 
         viewModel.sureList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
         })
 
-        btnMode.setOnClickListener {
+        btnMode.onClick {
             settings.changeAppMode()
             (requireActivity() as MainActivity).updateThemeAndRecreateActivity()
         }
 
-
-        btnClearSearchText.setOnClickListener {
+        btnClearSearchText.onClick {
             etSearch.text.clear()
         }
 
@@ -68,12 +69,12 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list), SureItemClic
         fillRecyclerView(etSearch.text)
     }
 
-    override fun onSureClick(sureId: Int, sureName: String) {
+    private val onSureItemClick = { sureId: Int, sureName: String ->
         val action = SureListFragmentDirections.actionTranslationFragmentToAyatListFragment(sureId, sureName)
         navController.navigate(action)
     }
 
-    override fun onOriginalSureClick(sureId: Int) {
+    private val onOriginalSureClick = { sureId: Int ->
         val action = SureListFragmentDirections.actionTranslationFragmentToOriginalAyatFragment(sureId)
         navController.navigate(action)
     }

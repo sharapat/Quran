@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bismillah.quran.R
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.core.extentions.onClick
 import kotlinx.android.synthetic.main.fragment_simple_reading_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
@@ -34,17 +35,17 @@ class OriginalAyatFragment : BaseFragment(R.layout.fragment_simple_reading_list)
             tvToolbarTitle.text = it.originalName
         })
 
-        btnMinus.setOnClickListener {
+        btnMinus.onClick {
             settings.decreaseArabTextSize()
             adapter.update()
         }
 
-        btnPlus.setOnClickListener {
+        btnPlus.onClick {
             settings.increaseArabTextSize()
             adapter.update()
         }
 
-        backButton.setOnClickListener {
+        backButton.onClick {
             requireActivity().onBackPressed()
         }
     }

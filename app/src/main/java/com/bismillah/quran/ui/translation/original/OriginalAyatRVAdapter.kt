@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bismillah.quran.R
 import com.bismillah.quran.Settings
 import com.bismillah.quran.data.model.QuranText
-import com.bismillah.quran.extentions.inflate
+import com.bismillah.quran.core.extentions.inflate
 
 class OriginalAyatRVAdapter(private val settings: Settings) : RecyclerView.Adapter<OriginalAyatViewHolder>() {
 

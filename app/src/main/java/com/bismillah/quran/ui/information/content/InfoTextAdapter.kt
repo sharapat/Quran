@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bismillah.quran.R
 import com.bismillah.quran.Settings
 import com.bismillah.quran.data.model.InfoText
-import com.bismillah.quran.extentions.inflate
+import com.bismillah.quran.core.extentions.inflate
 import kotlinx.android.synthetic.main.simple_text.view.*
 
 class InfoTextAdapter(private val settings: Settings) : RecyclerView.Adapter<InfoTextAdapter.InfoTextViewHolder>() {

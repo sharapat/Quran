@@ -9,18 +9,21 @@ import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bismillah.quran.Settings
-import com.bismillah.quran.callback.AyatItemClickListener
 import com.bismillah.quran.data.model.Ayat
+import com.bismillah.quran.core.extentions.onClick
 import kotlinx.android.synthetic.main.item_ayat.view.*
 
-class AyatListViewHolder(itemView: View, private val itemClickListener: AyatItemClickListener?) :
-    RecyclerView.ViewHolder(itemView) {
+class AyatListViewHolder(
+    itemView: View,
+    private val onOptionsClick: (view:View, ayatId: Int) -> Unit,
+    private val onLinkClick: (Int) -> Unit
+) : RecyclerView.ViewHolder(itemView) {
 
     fun populateModel(ayat: Ayat, settings: Settings) {
         itemView.tvText.textSize = settings.getTextSize().toFloat()
         setTextViewHtml(itemView.tvText, ayat.text)
-        itemView.optionBtn.setOnClickListener {
-            itemClickListener?.onItemClick(itemView.optionBtn, ayat.id)
+        itemView.optionBtn.onClick {
+            onOptionsClick.invoke(itemView.optionBtn, ayat.id)
         }
     }
 
@@ -32,7 +35,7 @@ class AyatListViewHolder(itemView: View, private val itemClickListener: AyatItem
             override fun onClick(widget: View) {
                 val fullText = (widget as TextView).text.toString()
                 val link = fullText.substring(start, end)
-                itemClickListener?.onLinkClick(link.toInt())
+                onLinkClick.invoke(link.toInt())
             }
         }
         strBuilder.setSpan(clickable, start, end, flags)
