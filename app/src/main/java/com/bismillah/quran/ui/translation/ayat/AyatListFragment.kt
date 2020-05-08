@@ -12,6 +12,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.extentions.addVertDivider
+import com.bismillah.quran.extentions.onClick
 import kotlinx.android.synthetic.main.fragment_ayat_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
@@ -41,7 +43,7 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
             onOptionsBtnClick(v, ayatId)
         }
         rvAyat.adapter = adapter
-        rvAyat.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        rvAyat.addVertDivider(context)
         val sureId = safeArgs.sureId
         viewModel.getAyatList(sureId)
         viewModel.getSureById(sureId)
@@ -55,14 +57,14 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
         viewModel.ayatList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
         })
-        backButton.setOnClickListener {
+        backButton.onClick {
             activity?.onBackPressed()
         }
-        btnPlus.setOnClickListener {
+        btnPlus.onClick {
             settings.increaseTextSize()
             adapter.update()
         }
-        btnMinus.setOnClickListener {
+        btnMinus.onClick {
             settings.decreaseTextSize()
             adapter.update()
         }

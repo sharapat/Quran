@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
 import com.bismillah.quran.callback.InfoItemClickListener
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.extentions.onClick
 import com.bismillah.quran.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_info.*
 import kotlinx.android.synthetic.main.main_toolbar.*
@@ -31,7 +32,7 @@ class InfoListFragment : BaseFragment(R.layout.fragment_info), InfoItemClickList
         viewModel.infoTitleList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
         })
-        btnMode.setOnClickListener {
+        btnMode.onClick {
             settings.changeAppMode()
             (requireActivity() as MainActivity).updateThemeAndRecreateActivity()
         }

@@ -7,6 +7,7 @@ import com.bismillah.quran.R
 import com.bismillah.quran.callback.InfoItemClickListener
 import com.bismillah.quran.data.model.Info
 import com.bismillah.quran.extentions.inflate
+import com.bismillah.quran.extentions.onClick
 import kotlinx.android.synthetic.main.item_info_list.view.*
 
 class InfoListAdapter : RecyclerView.Adapter<InfoListAdapter.InfoViewHolder>() {
@@ -16,7 +17,7 @@ class InfoListAdapter : RecyclerView.Adapter<InfoListAdapter.InfoViewHolder>() {
 
         fun populateModel(info: Info) {
             itemView.tvInfoTitle.text = info.title
-            itemView.setOnClickListener {
+            itemView.onClick {
                 itemClickListener?.onItemClick(info.id, info.title)
             }
         }

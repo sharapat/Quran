@@ -7,6 +7,7 @@ import androidx.navigation.fragment.navArgs
 import com.bismillah.quran.R
 import com.bismillah.quran.data.model.InfoText
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.extentions.onClick
 import kotlinx.android.synthetic.main.fragment_simple_reading_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
@@ -33,14 +34,14 @@ class InfoTextFragment : BaseFragment(R.layout.fragment_simple_reading_list) {
         viewModel.infoList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
         })
-        backButton.setOnClickListener {
+        backButton.onClick {
             requireActivity().onBackPressed()
         }
-        btnMinus.setOnClickListener {
+        btnMinus.onClick {
             settings.decreaseTextSize()
             adapter.notifyDataSetChanged()
         }
-        btnPlus.setOnClickListener {
+        btnPlus.onClick {
             settings.increaseTextSize()
             adapter.notifyDataSetChanged()
         }

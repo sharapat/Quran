@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bismillah.quran.R
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.extentions.onClick
 import com.bismillah.quran.ui.explanation.sure.SureExplanationListAdapter
 import kotlinx.android.synthetic.main.fragment_simple_reading_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
@@ -31,14 +32,14 @@ class AyatExplanationFragment : BaseFragment(R.layout.fragment_simple_reading_li
             adapter.models = it
         })
         tvToolbarTitle.text = safeArgs.sureName
-        backButton.setOnClickListener {
+        backButton.onClick {
             requireActivity().onBackPressed()
         }
-        btnMinus.setOnClickListener {
+        btnMinus.onClick {
             settings.decreaseTextSize()
             adapter.update()
         }
-        btnPlus.setOnClickListener {
+        btnPlus.onClick {
             settings.increaseTextSize()
             adapter.update()
         }

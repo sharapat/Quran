@@ -14,6 +14,7 @@ import com.bismillah.quran.Settings
 import com.bismillah.quran.callback.FavoriteAyatItemClickListener
 import com.bismillah.quran.data.model.Ayat
 import com.bismillah.quran.extentions.inflate
+import com.bismillah.quran.extentions.onClick
 import kotlinx.android.synthetic.main.item_favorite.view.*
 
 class FavoriteListAdapter(private val settings: Settings) : RecyclerView.Adapter<FavoriteListAdapter.FavoriteViewHolder>() {
@@ -49,7 +50,7 @@ class FavoriteListAdapter(private val settings: Settings) : RecyclerView.Adapter
             setTextViewHtml(itemView.tvAyatText, model.text)
             itemView.tvSureName.textSize = settings.getTextSize().toFloat()
             itemView.tvAyatText.textSize = settings.getTextSize().toFloat()
-            itemView.optionBtn.setOnClickListener {
+            itemView.optionBtn.onClick {
                 itemClickListener?.onItemClick(itemView.optionBtn, model.id, position)
             }
         }

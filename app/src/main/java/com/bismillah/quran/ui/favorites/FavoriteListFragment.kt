@@ -11,6 +11,7 @@ import com.bismillah.quran.R
 import com.bismillah.quran.callback.FavoriteAyatItemClickListener
 import com.bismillah.quran.extentions.visibility
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.extentions.onClick
 import com.bismillah.quran.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.main_toolbar.*
@@ -40,7 +41,7 @@ class FavoriteListFragment : BaseFragment(R.layout.fragment_favorites), Favorite
             emptyFavorites.visibility(it.isNullOrEmpty())
             adapter.models = it.toMutableList()
         })
-        btnMode.setOnClickListener {
+        btnMode.onClick {
             settings.changeAppMode()
             (requireActivity() as MainActivity).updateThemeAndRecreateActivity()
         }

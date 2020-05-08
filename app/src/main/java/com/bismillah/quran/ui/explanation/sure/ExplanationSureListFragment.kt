@@ -9,9 +9,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
-import com.bismillah.quran.callback.SureItemClickListener
 import com.bismillah.quran.extentions.visibility
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.extentions.onClick
 import com.bismillah.quran.ui.main.MainActivity
 import com.bismillah.quran.ui.translation.sure.SureListAdapter
 import com.bismillah.quran.ui.translation.sure.SureListViewModel
@@ -36,12 +36,12 @@ class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list), S
             adapter.models = it
         })
 
-        btnMode.setOnClickListener {
+        btnMode.onClick {
             settings.changeAppMode()
             (requireActivity() as MainActivity).updateThemeAndRecreateActivity()
         }
 
-        btnClearSearchText.setOnClickListener {
+        btnClearSearchText.onClick {
             etSearch.text.clear()
         }
 
