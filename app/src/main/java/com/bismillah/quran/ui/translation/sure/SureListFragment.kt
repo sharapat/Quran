@@ -27,12 +27,8 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list) {
         super.onViewCreated(view, savedInstanceState)
         setModeBtnImage()
         navController = Navigation.findNavController(view)
-        adapter.setOnItemClickListener { sureId, sureName ->
-            onSureItemClick(sureId, sureName)
-        }
-        adapter.setOnOriginalSureClickListener {
-            onOriginalSureClick(it)
-        }
+        adapter.setOnItemClickListener(onSureItemClick)
+        adapter.setOnOriginalSureClickListener(onOriginalSureClick)
         rvSure.adapter = adapter
         rvSure.addVertDivider(context)
 
@@ -73,12 +69,12 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list) {
         fillRecyclerView(etSearch.text)
     }
 
-    private fun onSureItemClick(sureId: Int, sureName: String) {
+    private val onSureItemClick = { sureId: Int, sureName: String ->
         val action = SureListFragmentDirections.actionTranslationFragmentToAyatListFragment(sureId, sureName)
         navController.navigate(action)
     }
 
-    private fun onOriginalSureClick(sureId: Int) {
+    private val onOriginalSureClick = { sureId: Int ->
         val action = SureListFragmentDirections.actionTranslationFragmentToOriginalAyatFragment(sureId)
         navController.navigate(action)
     }

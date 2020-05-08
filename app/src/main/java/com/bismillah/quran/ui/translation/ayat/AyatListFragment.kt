@@ -35,12 +35,8 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        adapter.setOnLinkClickListener {
-            onLinkClick(it)
-        }
-        adapter.setOnOptionsClickListener { v, ayatId ->
-            onOptionsBtnClick(v, ayatId)
-        }
+        adapter.setOnLinkClickListener(onLinkClick)
+        adapter.setOnOptionsClickListener(onOptionsBtnClick)
         rvAyat.adapter = adapter
         rvAyat.addVertDivider(context)
         val sureId = safeArgs.sureId
@@ -69,12 +65,12 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
         }
     }
 
-    private fun onLinkClick(number: Int) {
+    private val onLinkClick = { number: Int ->
         val action = AyatListFragmentDirections.actionAyatListFragment(number, sureName)
         navController.navigate(action)
     }
 
-    private fun onOptionsBtnClick(view: View, ayatId: Int) {
+    private val onOptionsBtnClick = { view: View, ayatId: Int ->
         val popupMenu = PopupMenu(context, view)
         try {
             val field = popupMenu.javaClass.getDeclaredField("mPopup")

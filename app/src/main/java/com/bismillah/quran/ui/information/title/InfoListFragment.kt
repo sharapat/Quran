@@ -24,9 +24,7 @@ class InfoListFragment : BaseFragment(R.layout.fragment_info) {
         navController = Navigation.findNavController(view)
         setModeBtnImage()
         hideKeyboard(requireActivity())
-        adapter.setItemClickListener { id, titleName ->
-            onItemClick(id, titleName)
-        }
+        adapter.setItemClickListener(onItemClick)
         rvInfo.adapter = adapter
         rvInfo.addVertDivider(context)
         viewModel.getInfoTitles()
@@ -39,7 +37,7 @@ class InfoListFragment : BaseFragment(R.layout.fragment_info) {
         }
     }
 
-    private fun onItemClick(id: Int, titleName: String) {
+    private val onItemClick = { id: Int, titleName: String ->
         val action = InfoListFragmentDirections.actionInfoListFragmentToInfoTextFragment(id, titleName)
         navController.navigate(action)
     }

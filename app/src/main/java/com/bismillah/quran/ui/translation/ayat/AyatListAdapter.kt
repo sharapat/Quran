@@ -14,6 +14,7 @@ class AyatListAdapter(private val settings: Settings) : RecyclerView.Adapter<Aya
     private var onOptionsClick: (view: View, ayatId: Int) -> Unit = { _, _ ->
         Log.w("Warning", "onOptionsClick function is not set to AyatListAdapter" )
     }
+
     private var onLinkClick: (Int) -> Unit = { _ ->
         Log.w("Warning", "onLinkClick functions is not set to AyatListAdapter")
     }
