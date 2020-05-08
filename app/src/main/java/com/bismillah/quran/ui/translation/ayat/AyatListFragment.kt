@@ -11,7 +11,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
-import com.bismillah.quran.callback.AyatItemClickListener
 import com.bismillah.quran.core.BaseFragment
 import kotlinx.android.synthetic.main.fragment_ayat_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
@@ -19,7 +18,7 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.lang.Exception
 
-class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClickListener {
+class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
 
     private val viewModel: AyatListViewModel by viewModel()
     private val adapter: AyatListAdapter by inject()
@@ -35,7 +34,12 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        adapter.itemClickListener = this
+        adapter.setOnLinkClickListener {
+            onLinkClick(it)
+        }
+        adapter.setOnOptionsClickListener { v, ayatId ->
+            onOptionsBtnClick(v, ayatId)
+        }
         rvAyat.adapter = adapter
         rvAyat.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         val sureId = safeArgs.sureId
@@ -64,12 +68,12 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list), AyatItemClic
         }
     }
 
-    override fun onLinkClick(number: Int) {
+    private fun onLinkClick(number: Int) {
         val action = AyatListFragmentDirections.actionAyatListFragment(number, sureName)
         navController.navigate(action)
     }
 
-    override fun onItemClick(view: View, ayatId: Int) {
+    private fun onOptionsBtnClick(view: View, ayatId: Int) {
         val popupMenu = PopupMenu(context, view)
         try {
             val field = popupMenu.javaClass.getDeclaredField("mPopup")

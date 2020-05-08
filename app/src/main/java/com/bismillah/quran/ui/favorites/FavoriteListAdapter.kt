@@ -11,7 +11,6 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bismillah.quran.R
 import com.bismillah.quran.Settings
-import com.bismillah.quran.callback.AyatItemClickListener
 import com.bismillah.quran.callback.FavoriteAyatItemClickListener
 import com.bismillah.quran.data.model.Ayat
 import com.bismillah.quran.extentions.inflate
