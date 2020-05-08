@@ -7,11 +7,11 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
-import com.bismillah.quran.extentions.visibility
+import com.bismillah.quran.core.extentions.visibility
 import com.bismillah.quran.core.BaseFragment
-import com.bismillah.quran.extentions.onClick
+import com.bismillah.quran.core.extentions.addVertDivider
+import com.bismillah.quran.core.extentions.onClick
 import com.bismillah.quran.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_sure_list.*
 import kotlinx.android.synthetic.main.main_toolbar.*
@@ -34,7 +34,7 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list) {
             onOriginalSureClick(it)
         }
         rvSure.adapter = adapter
-        rvSure.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        rvSure.addVertDivider(context)
 
         viewModel.sureList.observe(viewLifecycleOwner, Observer {
             adapter.models = it

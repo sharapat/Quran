@@ -6,19 +6,18 @@ import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
-import com.bismillah.quran.callback.FavoriteAyatItemClickListener
-import com.bismillah.quran.extentions.visibility
+import com.bismillah.quran.core.extentions.visibility
 import com.bismillah.quran.core.BaseFragment
-import com.bismillah.quran.extentions.onClick
+import com.bismillah.quran.core.extentions.addVertDivider
+import com.bismillah.quran.core.extentions.onClick
 import com.bismillah.quran.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.main_toolbar.*
 import org.koin.android.ext.android.inject
 import java.lang.Exception
 
-class FavoriteListFragment : BaseFragment(R.layout.fragment_favorites), FavoriteAyatItemClickListener {
+class FavoriteListFragment : BaseFragment(R.layout.fragment_favorites) {
     private val adapter: FavoriteListAdapter by inject()
     private val viewModel: FavoriteListViewModel by inject()
     private lateinit var navController: NavController
@@ -32,9 +31,10 @@ class FavoriteListFragment : BaseFragment(R.layout.fragment_favorites), Favorite
         super.onViewCreated(view, savedInstanceState)
         setModeBtnImage()
         navController = Navigation.findNavController(view)
-        adapter.itemClickListener = this
+        adapter.setOnItemClickListener(onItemClick)
+        adapter.setOnLinkClickListener(onLinkClick)
         rvFavorites.adapter = adapter
-        rvFavorites.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        rvFavorites.addVertDivider(context)
         viewModel.getFavorites()
         tv_toolbar_title.text = getText(R.string.favorites)
         viewModel.favoriteAyatList.observe(viewLifecycleOwner, Observer {
@@ -47,12 +47,12 @@ class FavoriteListFragment : BaseFragment(R.layout.fragment_favorites), Favorite
         }
     }
 
-    override fun onLinkClick(number: Int) {
+    private val onLinkClick = { number: Int ->
         val action = FavoriteListFragmentDirections.actionFavoriteListFragmentToAyatExplanationFragment(number, getString(R.string.favorites))
         navController.navigate(action)
     }
 
-    override fun onItemClick(view: View, ayatId: Int, position: Int) {
+    private val onItemClick = { view: View, ayatId: Int, position: Int ->
         val popupMenu = PopupMenu(context, view)
         try {
             val field = popupMenu.javaClass.getDeclaredField("mPopup")

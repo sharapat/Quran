@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bismillah.quran.R
 import com.bismillah.quran.data.model.Sure
-import com.bismillah.quran.extentions.onClick
+import com.bismillah.quran.core.extentions.onClick
 import kotlinx.android.synthetic.main.item_sure.view.*
 
 class SureListViewHolder(

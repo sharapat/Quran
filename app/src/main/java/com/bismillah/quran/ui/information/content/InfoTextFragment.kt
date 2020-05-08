@@ -7,7 +7,7 @@ import androidx.navigation.fragment.navArgs
 import com.bismillah.quran.R
 import com.bismillah.quran.data.model.InfoText
 import com.bismillah.quran.core.BaseFragment
-import com.bismillah.quran.extentions.onClick
+import com.bismillah.quran.core.extentions.onClick
 import kotlinx.android.synthetic.main.fragment_simple_reading_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject

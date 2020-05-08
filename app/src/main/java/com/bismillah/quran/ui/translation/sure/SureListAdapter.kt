@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bismillah.quran.R
 import com.bismillah.quran.data.model.Sure
-import com.bismillah.quran.extentions.inflate
+import com.bismillah.quran.core.extentions.inflate
 
 class SureListAdapter(
     private val isOriginalTextNeeded: Boolean = true

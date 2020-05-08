@@ -1,4 +1,4 @@
-package com.bismillah.quran.extentions
+package com.bismillah.quran.core.extentions
 
 import android.content.Context
 import android.content.res.Resources

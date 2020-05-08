@@ -4,6 +4,7 @@ import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.URLSpan
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -11,10 +12,9 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bismillah.quran.R
 import com.bismillah.quran.Settings
-import com.bismillah.quran.callback.FavoriteAyatItemClickListener
 import com.bismillah.quran.data.model.Ayat
-import com.bismillah.quran.extentions.inflate
-import com.bismillah.quran.extentions.onClick
+import com.bismillah.quran.core.extentions.inflate
+import com.bismillah.quran.core.extentions.onClick
 import kotlinx.android.synthetic.main.item_favorite.view.*
 
 class FavoriteListAdapter(private val settings: Settings) : RecyclerView.Adapter<FavoriteListAdapter.FavoriteViewHolder>() {
@@ -31,7 +31,20 @@ class FavoriteListAdapter(private val settings: Settings) : RecyclerView.Adapter
         notifyItemRangeChanged(position, models.size)
     }
 
-    var itemClickListener: FavoriteAyatItemClickListener? = null
+    private var onItemClick: (view: View, ayatId: Int, position: Int) -> Unit = { _, _, _ ->
+        Log.w("Warning", "onItemClick is not set to FavoriteListAdapter")
+    }
+    private var onLinkClick: (Int) -> Unit = {
+        Log.w("Warning", "onLinkClick is not set to FavoriteListAdapter")
+    }
+
+    fun setOnItemClickListener(onItemClick: (view: View, ayatId: Int, position: Int) -> Unit) {
+        this.onItemClick = onItemClick
+    }
+
+    fun setOnLinkClickListener(onLinkClick: (Int) -> Unit) {
+        this.onLinkClick = onLinkClick
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val itemView = parent.inflate(R.layout.item_favorite)
@@ -51,7 +64,7 @@ class FavoriteListAdapter(private val settings: Settings) : RecyclerView.Adapter
             itemView.tvSureName.textSize = settings.getTextSize().toFloat()
             itemView.tvAyatText.textSize = settings.getTextSize().toFloat()
             itemView.optionBtn.onClick {
-                itemClickListener?.onItemClick(itemView.optionBtn, model.id, position)
+                onItemClick.invoke(itemView.optionBtn, model.id, position)
             }
         }
 
@@ -63,7 +76,7 @@ class FavoriteListAdapter(private val settings: Settings) : RecyclerView.Adapter
                 override fun onClick(widget: View) {
                     val fullText = (widget as TextView).text.toString()
                     val link = fullText.substring(start, end)
-                    itemClickListener?.onLinkClick(link.toInt())
+                    onLinkClick.invoke(link.toInt())
                 }
             }
             strBuilder.setSpan(clickable, start, end, flags)

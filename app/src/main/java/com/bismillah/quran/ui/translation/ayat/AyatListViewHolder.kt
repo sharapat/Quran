@@ -10,7 +10,7 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bismillah.quran.Settings
 import com.bismillah.quran.data.model.Ayat
-import com.bismillah.quran.extentions.onClick
+import com.bismillah.quran.core.extentions.onClick
 import kotlinx.android.synthetic.main.item_ayat.view.*
 
 class AyatListViewHolder(

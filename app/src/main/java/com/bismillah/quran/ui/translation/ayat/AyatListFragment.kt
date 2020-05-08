@@ -9,11 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.bismillah.quran.R
 import com.bismillah.quran.core.BaseFragment
-import com.bismillah.quran.extentions.addVertDivider
-import com.bismillah.quran.extentions.onClick
+import com.bismillah.quran.core.extentions.addVertDivider
+import com.bismillah.quran.core.extentions.onClick
 import kotlinx.android.synthetic.main.fragment_ayat_list.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
