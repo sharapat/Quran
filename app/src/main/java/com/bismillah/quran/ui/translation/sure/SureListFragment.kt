@@ -28,7 +28,7 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list) {
         setModeBtnImage()
         navController = Navigation.findNavController(view)
         adapter.setOnItemClickListener(onSureItemClick)
-        adapter.setOnOriginalSureClickListener(onOriginalSureClick)
+        adapter.setOnOriginalSureClick(onOriginalSureClick)
         rvSure.adapter = adapter
         rvSure.addVertDivider(context)
 

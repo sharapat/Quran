@@ -17,24 +17,25 @@ class SureListAdapter(
             notifyDataSetChanged()
         }
 
-    private var onItemClick: (sureId: Int, sureName: String) -> Unit = { _, _ ->
-        Log.w("Warning", "onItemClickListener is not set to SureListAdapter")
-    }
-    private var onOriginalSureClick: (sureId: Int) -> Unit = { _->
-        Log.w("Warning", "onOriginalSureClickListener is not set to SureListAdapter")
+    private var onSureItemClick: (sureId: Int, sureName: String) -> Unit = { sureId, sureName ->
+        Log.w("Warning", "onSureItemClick is not set to SureListAdapter")
     }
 
-    fun setOnItemClickListener(onItemClick: (sureId: Int, sureName: String) -> Unit) {
-        this.onItemClick = onItemClick
+    private var onOriginalSureClick: (sureId: Int) -> Unit = {
+        Log.w("Warning", "onOriginalSureClick is not set to SureListAdapter")
     }
 
-    fun setOnOriginalSureClickListener(onOriginalSureClick: (sureId: Int) -> Unit) {
+    fun setOnItemClickListener(onSureItemClick: (sureId: Int, sureName: String) -> Unit) {
+        this.onSureItemClick = onSureItemClick
+    }
+
+    fun setOnOriginalSureClick(onOriginalSureClick: (sureId: Int) -> Unit) {
         this.onOriginalSureClick = onOriginalSureClick
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SureListViewHolder {
         val view = parent.inflate(R.layout.item_sure)
-        return SureListViewHolder(view, onItemClick, onOriginalSureClick)
+        return SureListViewHolder(view, onSureItemClick, onOriginalSureClick)
     }
 
     override fun getItemCount(): Int = models.size
