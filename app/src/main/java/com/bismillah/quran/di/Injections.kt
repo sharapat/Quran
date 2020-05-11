@@ -59,5 +59,5 @@ val viewModelModule = module {
     viewModel { InfoListViewModel(get()) }
     viewModel { InfoViewModel(get()) }
     viewModel { SearchViewModel(get()) }
-    viewModel { SplashViewModel(get(), get()) }
+    viewModel { SplashViewModel(get()) }
 }

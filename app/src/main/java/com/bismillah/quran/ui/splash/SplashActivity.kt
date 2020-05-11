@@ -1,11 +1,13 @@
 package com.bismillah.quran.ui.splash
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.bismillah.quran.R
 import com.bismillah.quran.data.model.Ayat
 import com.bismillah.quran.data.model.Sure
+import com.bismillah.quran.ui.main.MainActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SplashActivity : AppCompatActivity() {
@@ -24,6 +26,12 @@ class SplashActivity : AppCompatActivity() {
         })
         viewModel.sureList.observe(this, Observer {
             sureList = it
+            viewModel.updateAyatList(ayatList, sureList, openMainActivity)
         })
+    }
+
+    private val openMainActivity = {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }

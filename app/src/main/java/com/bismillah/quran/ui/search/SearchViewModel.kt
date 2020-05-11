@@ -17,23 +17,9 @@ class SearchViewModel(private val quranDao: QuranDao) : ViewModel(), CoroutineSc
     val ayatList: LiveData<List<Ayat>>
         get() = _ayatList
 
-    private val _sureList: MutableLiveData<List<Sure>> = MutableLiveData()
-    val sureList: LiveData<List<Sure>>
-        get() = _sureList
-
     fun searchAyatByWord(word: String) {
         launch {
             searchAyatByWordAsync(word)
-        }
-    }
-
-    fun getAllSure() {
-        launch { getAllSureAsync() }
-    }
-
-    private suspend fun getAllSureAsync() {
-        withContext(Dispatchers.IO) {
-            _sureList.postValue(quranDao.getAllSure())
         }
     }
 

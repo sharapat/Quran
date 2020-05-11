@@ -54,7 +54,9 @@ class SearchAdapter(private val settings: Settings) : RecyclerView.Adapter<Searc
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun populateModel(model: Ayat, settings: Settings) {
+            itemView.tvSureName.textSize = settings.getTextSize().toFloat()
             itemView.tvText.textSize = settings.getTextSize().toFloat()
+            itemView.tvSureName.text = model.sureName
             itemView.tvText.setTextViewHtml(model.text, onLinkClick)
             itemView.optionBtn.onClick {
                 onOptionsClick.invoke(itemView.optionBtn, model.id)

@@ -25,17 +25,18 @@ class SplashViewModel(private val quranDao: QuranDao) : ViewModel(), CoroutineSc
     val sureList: LiveData<List<Sure>>
         get() = _sureList
 
-    fun updateAyatList(ayatList: List<Ayat>, sureList: List<Sure>) {
-        launch { updateAyatListAsync(ayatList, sureList) }
+    fun updateAyatList(ayatList: List<Ayat>, sureList: List<Sure>, doOnFinish: () -> Unit) {
+        launch { updateAyatListAsync(ayatList, sureList, doOnFinish) }
     }
 
-    private suspend fun updateAyatListAsync(ayatList: List<Ayat>, sureList: List<Sure>) {
+    private suspend fun updateAyatListAsync(ayatList: List<Ayat>, sureList: List<Sure>, doOnFinish: () -> Unit) {
         withContext(Dispatchers.IO) {
             ayatList.forEach { ayat ->
                 val sureName = sureList.find { sure -> sure.id == ayat.sureId }?.name
                 ayat.sureName = sureName
             }
             quranDao.updateAyatList(ayatList)
+            doOnFinish.invoke()
         }
     }
 
