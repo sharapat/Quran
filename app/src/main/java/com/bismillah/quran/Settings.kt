@@ -7,8 +7,15 @@ class Settings(private val preferences: SharedPreferences) {
         const val DARK_MODE = "darkMode"
         const val TEXT_SIZE = "TextSize"
         const val ARAB_TEXT_SIZE = "ArabTextSize"
+        const val IS_APP_FIRST_LAUNCH = "isAppFirstLaunch"
         const val STEP = 2
     }
+
+    fun setFirstLaunch() {
+        preferences.edit().putBoolean(IS_APP_FIRST_LAUNCH, true).apply()
+    }
+
+    fun isAppFirstLaunch() : Boolean = preferences.getBoolean(IS_APP_FIRST_LAUNCH, false)
 
     fun changeAppMode() {
         if (isAppDarkMode()) {

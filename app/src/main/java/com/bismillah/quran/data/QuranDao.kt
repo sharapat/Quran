@@ -17,6 +17,9 @@ interface QuranDao {
     @Query("SELECT * FROM sureler WHERE id=:sureId")
     fun getSureById(sureId: Int) : Sure
 
+    @Query("SELECT * FROM ayatlar WHERE text like :word")
+    fun searchAyatByWord(word: String) : List<Ayat>
+
     @Query("SELECT * FROM ayatlar WHERE sure=:sureId")
     fun getAllAyatBySureId(sureId: Int): List<Ayat>
 
@@ -43,4 +46,10 @@ interface QuranDao {
 
     @Query("SELECT * FROM qosimsha_text WHERE qosimsha=:infoTitleId")
     fun getInfoByTitleIf(infoTitleId: Int) : List<InfoText>
+
+    @Query("SELECT * FROM ayatlar")
+    fun getAllAyat(): List<Ayat>
+
+    @Update
+    fun updateAyatList(list: List<Ayat>)
 }

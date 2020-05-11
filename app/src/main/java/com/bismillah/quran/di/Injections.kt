@@ -16,6 +16,9 @@ import com.bismillah.quran.ui.favorites.FavoriteListViewModel
 import com.bismillah.quran.ui.information.content.InfoTextAdapter
 import com.bismillah.quran.ui.information.content.InfoViewModel
 import com.bismillah.quran.ui.information.title.InfoListViewModel
+import com.bismillah.quran.ui.search.SearchAdapter
+import com.bismillah.quran.ui.search.SearchViewModel
+import com.bismillah.quran.ui.splash.SplashViewModel
 import com.bismillah.quran.ui.translation.sure.SureListViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -43,6 +46,7 @@ val adapterModule = module {
     single { SureExplanationListAdapter(get()) }
     single { FavoriteListAdapter(get()) }
     single { InfoTextAdapter(get()) }
+    single { SearchAdapter(get()) }
 }
 
 val viewModelModule = module {
@@ -54,4 +58,6 @@ val viewModelModule = module {
     viewModel { FavoriteListViewModel(get()) }
     viewModel { InfoListViewModel(get()) }
     viewModel { InfoViewModel(get()) }
+    viewModel { SearchViewModel(get()) }
+    viewModel { SplashViewModel(get(), get()) }
 }

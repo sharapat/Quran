@@ -13,7 +13,7 @@ import com.bismillah.quran.R
 import com.bismillah.quran.core.BaseFragment
 import com.bismillah.quran.core.extentions.addVertDivider
 import com.bismillah.quran.core.extentions.onClick
-import kotlinx.android.synthetic.main.fragment_ayat_list.*
+import kotlinx.android.synthetic.main.layout_recycler.*
 import kotlinx.android.synthetic.main.reading_page_toolbar.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -37,8 +37,8 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
         navController = Navigation.findNavController(view)
         adapter.setOnLinkClickListener(onLinkClick)
         adapter.setOnOptionsClickListener(onOptionsBtnClick)
-        rvAyat.adapter = adapter
-        rvAyat.addVertDivider(context)
+        recyclerView.adapter = adapter
+        recyclerView.addVertDivider(context)
         val sureId = safeArgs.sureId
         viewModel.getAyatList(sureId)
         viewModel.getSureById(sureId)
@@ -50,6 +50,7 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
             sureName = it.name
         })
         viewModel.ayatList.observe(viewLifecycleOwner, Observer {
+
             adapter.models = it
         })
         backButton.onClick {
@@ -65,8 +66,8 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
         }
     }
 
-    private val onLinkClick = { number: Int ->
-        val action = AyatListFragmentDirections.actionAyatListFragment(number, sureName)
+    private val onLinkClick = { number: String ->
+        val action = AyatListFragmentDirections.actionAyatListFragment(number.toInt(), sureName)
         navController.navigate(action)
     }
 

@@ -3,17 +3,19 @@
     package="com.bismillah.quran">
 
     <application
+        android:name=".QuranApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppThemeLight"
-        android:name=".QuranApp">
-        <activity android:name=".ui.main.MainActivity"
+        android:theme="@style/AppThemeLight">
+        <activity android:name=".ui.splash.SplashActivity"></activity>
+        <activity
+            android:name=".ui.main.MainActivity"
             android:screenOrientation="unspecified"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/LightTheme">
+            android:theme="@style/LightTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
