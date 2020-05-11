@@ -12,7 +12,6 @@
         android:layout_marginTop="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:textColor="?attr/textColor"
-        android:textColorLink="@color/color_link"
         android:textSize="@dimen/text_size_standard"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

@@ -10,17 +10,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeLight">
-        <activity android:name=".ui.splash.SplashActivity"></activity>
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:screenOrientation="unspecified"
-            android:theme="@style/LightTheme"
-            android:windowSoftInputMode="stateAlwaysHidden">
+        <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="unspecified"
+            android:theme="@style/LightTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
     </application>
 

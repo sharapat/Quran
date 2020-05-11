@@ -40,10 +40,12 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         adapter.setOnOptionsClickListener(onOptionsBtnClick)
         recyclerView.adapter = adapter
         viewModel.ayatList.observe(viewLifecycleOwner, Observer {
-            Log.d("magluwmat", it.toString())
             adapter.models = it
         })
         etSearch.addTextChangedListener {
+            if (it.isNullOrEmpty()) {
+                adapter.models = listOf()
+            }
             viewModel.searchAyatByWord(it.toString())
         }
     }

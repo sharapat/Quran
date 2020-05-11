@@ -15,7 +15,7 @@ class Settings(private val preferences: SharedPreferences) {
         preferences.edit().putBoolean(IS_APP_FIRST_LAUNCH, true).apply()
     }
 
-    fun isAppFirstLaunch() : Boolean = preferences.getBoolean(IS_APP_FIRST_LAUNCH, false)
+    fun isAppFirstLaunch() : Boolean = preferences.getBoolean(IS_APP_FIRST_LAUNCH, true)
 
     fun changeAppMode() {
         if (isAppDarkMode()) {

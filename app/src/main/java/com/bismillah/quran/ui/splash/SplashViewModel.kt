@@ -1,5 +1,6 @@
 package com.bismillah.quran.ui.splash
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,6 +35,7 @@ class SplashViewModel(private val quranDao: QuranDao) : ViewModel(), CoroutineSc
             ayatList.forEach { ayat ->
                 val sureName = sureList.find { sure -> sure.id == ayat.sureId }?.name
                 ayat.sureName = sureName
+                Log.d("ayat_sure", ayat.sureName)
             }
             quranDao.updateAyatList(ayatList)
             doOnFinish.invoke()
