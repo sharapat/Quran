@@ -38,6 +38,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private val openMainActivity = {
+        settings.setFirstLaunch()
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

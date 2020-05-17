@@ -1,6 +1,7 @@
 package com.bismillah.quran.ui.search
 
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.item_search.view.*
 
 class SearchAdapter(private val settings: Settings) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
-    var models: List<Ayat> = listOf()
+    var models: List<Pair<String, Ayat>> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -53,13 +54,16 @@ class SearchAdapter(private val settings: Settings) : RecyclerView.Adapter<Searc
         private val onLinkClick: (String) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun populateModel(model: Ayat, settings: Settings) {
+        fun populateModel(model: Pair<String, Ayat>, settings: Settings) {
             itemView.tvSureName.textSize = settings.getTextSize().toFloat()
             itemView.tvText.textSize = settings.getTextSize().toFloat()
-            itemView.tvSureName.text = model.sureName
-            itemView.tvText.setTextViewHtml(model.text, onLinkClick)
+            itemView.tvSureName.text = model.second.sureName
+
+            itemView.tvText.setTextViewHtml(model.second.text.replace(model.first,
+                "<b>${model.first}</b>"), onLinkClick)
+
             itemView.optionBtn.onClick {
-                onOptionsClick.invoke(itemView.optionBtn, model.id)
+                onOptionsClick.invoke(itemView.optionBtn, model.second.id)
             }
         }
 

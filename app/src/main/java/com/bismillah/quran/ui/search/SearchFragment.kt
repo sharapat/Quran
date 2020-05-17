@@ -2,21 +2,28 @@ package com.bismillah.quran.ui.search
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
 import androidx.core.text.isDigitsOnly
 import androidx.core.widget.addTextChangedListener
+import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.navGraphViewModels
 import com.bismillah.quran.R
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.core.extentions.onClick
+import com.bismillah.quran.core.extentions.visibility
 import com.bismillah.quran.data.model.Sure
+import com.bismillah.quran.ui.main.MainActivity
 import com.bismillah.quran.ui.translation.ayat.AyatListFragmentDirections
 import com.bismillah.quran.ui.translation.ayat.AyatListViewModel
 import kotlinx.android.synthetic.main.layout_recycler.*
+import kotlinx.android.synthetic.main.main_toolbar.*
 import kotlinx.android.synthetic.main.search_action.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -35,18 +42,44 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        etSearch.hint = getString(R.string.seach_by_ayat)
+        if (etSearch.text.isNullOrEmpty()) {
+            adapter.models = emptyList()
+        }
         navController = Navigation.findNavController(view)
         adapter.setOnLinkClickListener(onLinkClick)
         adapter.setOnOptionsClickListener(onOptionsBtnClick)
         recyclerView.adapter = adapter
         viewModel.ayatList.observe(viewLifecycleOwner, Observer {
-            adapter.models = it
+            if (etSearch.text.isNotEmpty()) {
+                adapter.models = it
+            } else {
+                adapter.models = emptyList()
+            }
         })
         etSearch.addTextChangedListener {
-            if (it.isNullOrEmpty()) {
-                adapter.models = listOf()
+            if (it.toString().isNotEmpty()) {
+                btnClearSearchText.visibility(true)
+            } else {
+                btnClearSearchText.visibility(false)
             }
             viewModel.searchAyatByWord(it.toString())
+        }
+        btnMode.onClick {
+            settings.changeAppMode()
+            (requireActivity() as MainActivity).updateThemeAndRecreateActivity()
+        }
+        btnClearSearchText.onClick {
+            etSearch.text.clear()
+        }
+        setModeBtnImage()
+    }
+
+    private fun setModeBtnImage() {
+        if (settings.isAppDarkMode()) {
+            btnMode.setImageResource(R.drawable.sun)
+        } else {
+            btnMode.setImageResource(R.drawable.moon)
         }
     }
 

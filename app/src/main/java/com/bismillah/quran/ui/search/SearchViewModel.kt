@@ -13,8 +13,8 @@ class SearchViewModel(private val quranDao: QuranDao) : ViewModel(), CoroutineSc
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    private val _ayatList: MutableLiveData<List<Ayat>> = MutableLiveData()
-    val ayatList: LiveData<List<Ayat>>
+    private val _ayatList: MutableLiveData<List<Pair<String, Ayat>>> = MutableLiveData()
+    val ayatList: LiveData<List<Pair<String, Ayat>>>
         get() = _ayatList
 
     fun searchAyatByWord(word: String) {
@@ -25,7 +25,14 @@ class SearchViewModel(private val quranDao: QuranDao) : ViewModel(), CoroutineSc
 
     private suspend fun searchAyatByWordAsync(word: String) {
         withContext(Dispatchers.IO) {
-            _ayatList.postValue(quranDao.searchAyatByWord("$word%"))
+            if (word.isEmpty()) {
+                _ayatList.postValue(emptyList())
+                return@withContext
+            }
+            val list = quranDao.searchAyatByWord("%$word%")
+            val ayatPairList : MutableList<Pair<String, Ayat>> = mutableListOf()
+            list.map { ayatPairList.add(Pair(word, it)) }
+            _ayatList.postValue(ayatPairList)
         }
     }
 }
