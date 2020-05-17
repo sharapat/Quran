@@ -25,7 +25,7 @@ class SearchAdapter(private val settings: Settings) : RecyclerView.Adapter<Searc
         Log.w("Warning", "onLinkClick is not set to SearchAdapter")
     }
 
-    private var onOptionsClick: (view: View, ayatId: Int) -> Unit = { _, _ ->
+    private var onOptionsClick: (view: View, ayat: Ayat) -> Unit = { _, _ ->
         Log.w("Warning", "onOptionsClick function is not set to SearchAdapter" )
     }
 
@@ -33,7 +33,7 @@ class SearchAdapter(private val settings: Settings) : RecyclerView.Adapter<Searc
         this.onLinkClick = onLinkClick
     }
 
-    fun setOnOptionsClickListener(onOptionsClickListener: (view: View, ayatId: Int) -> Unit) {
+    fun setOnOptionsClickListener(onOptionsClickListener: (view: View, ayat: Ayat) -> Unit) {
         onOptionsClick = onOptionsClickListener
     }
 
@@ -50,7 +50,7 @@ class SearchAdapter(private val settings: Settings) : RecyclerView.Adapter<Searc
 
     inner class SearchViewHolder(
         itemView: View,
-        private val onOptionsClick: (view:View, ayatId: Int) -> Unit,
+        private val onOptionsClick: (view:View, ayat: Ayat) -> Unit,
         private val onLinkClick: (String) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {
 
@@ -63,7 +63,7 @@ class SearchAdapter(private val settings: Settings) : RecyclerView.Adapter<Searc
                 "<b>${model.first}</b>"), onLinkClick)
 
             itemView.optionBtn.onClick {
-                onOptionsClick.invoke(itemView.optionBtn, model.second.id)
+                onOptionsClick.invoke(itemView.optionBtn, model.second)
             }
         }
 

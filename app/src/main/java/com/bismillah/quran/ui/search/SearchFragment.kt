@@ -18,6 +18,7 @@ import com.bismillah.quran.R
 import com.bismillah.quran.core.BaseFragment
 import com.bismillah.quran.core.extentions.onClick
 import com.bismillah.quran.core.extentions.visibility
+import com.bismillah.quran.data.model.Ayat
 import com.bismillah.quran.data.model.Sure
 import com.bismillah.quran.ui.main.MainActivity
 import com.bismillah.quran.ui.translation.ayat.AyatListFragmentDirections
@@ -33,6 +34,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
     private val viewModel: SearchViewModel by viewModel()
     private val ayatViewModel: AyatListViewModel by viewModel()
     private val adapter: SearchAdapter by inject()
+    private lateinit var selectedAyat: Ayat
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +58,12 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
             } else {
                 adapter.models = emptyList()
             }
+        })
+        viewModel.sureToShare.observe(viewLifecycleOwner, Observer {
+            ayatViewModel.getSelectedAyat(selectedAyat.id)
+        })
+        ayatViewModel.selectedAyat.observe(viewLifecycleOwner, Observer { ayat->
+            goToShare(ayat.text)
         })
         etSearch.addTextChangedListener {
             if (it.toString().isNotEmpty()) {
@@ -88,8 +96,9 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         navController.navigate(action)
     }
 
-    private val onOptionsBtnClick = { view: View, ayatId: Int ->
+    private val onOptionsBtnClick = { view: View, ayat: Ayat ->
         val popupMenu = PopupMenu(context, view)
+        selectedAyat = ayat
         try {
             val field = popupMenu.javaClass.getDeclaredField("mPopup")
             field.isAccessible = true
@@ -105,12 +114,12 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.item_favorite -> {
-                    ayatViewModel.setFavorite(ayatId)
+                    ayatViewModel.setFavorite(ayat.id)
                     toastSH(getString(R.string.ayat_has_been_added_to_favorites))
                     return@setOnMenuItemClickListener true
                 }
                 R.id.item_share -> {
-                    ayatViewModel.getSelectedAyat(ayatId)
+                    viewModel.getSureById(ayat.sureId)
                     return@setOnMenuItemClickListener true
                 }
                 else -> return@setOnMenuItemClickListener false
@@ -128,7 +137,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
 
     private fun getShareSubjectText(ayatNumber: Int): String {
         if (ayatNumber == 0) return ""
-        val sure = ayatViewModel.currentSure.value
+        val sure = viewModel.sureToShare.value
         return "${getString(R.string.app_name)}\n${sure?.number} - ${sure?.name}, $ayatNumber-аят:"
     }
 
