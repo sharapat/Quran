@@ -2,26 +2,22 @@ package com.bismillah.quran.ui.search
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
+import android.text.Html
 import android.view.View
 import android.widget.PopupMenu
+import androidx.core.text.HtmlCompat
 import androidx.core.text.isDigitsOnly
 import androidx.core.widget.addTextChangedListener
-import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.navGraphViewModels
 import com.bismillah.quran.R
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.core.extentions.ifContainsLatin
 import com.bismillah.quran.core.extentions.onClick
 import com.bismillah.quran.core.extentions.visibility
 import com.bismillah.quran.data.model.Ayat
-import com.bismillah.quran.data.model.Sure
 import com.bismillah.quran.ui.main.MainActivity
-import com.bismillah.quran.ui.translation.ayat.AyatListFragmentDirections
 import com.bismillah.quran.ui.translation.ayat.AyatListViewModel
 import kotlinx.android.synthetic.main.layout_recycler.*
 import kotlinx.android.synthetic.main.main_toolbar.*
@@ -66,6 +62,11 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
             goToShare(ayat.text)
         })
         etSearch.addTextChangedListener {
+            if (it.toString().ifContainsLatin) {
+                btnClearSearchText.visibility(false)
+                etSearch.error = HtmlCompat.fromHtml("<font color=\"#ffffff\">${getString(R.string.you_can_not_use_latin)}<font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                return@addTextChangedListener
+            }
             if (it.toString().isNotEmpty()) {
                 btnClearSearchText.visibility(true)
             } else {
@@ -92,7 +93,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
     }
 
     private val onLinkClick = { number: String ->
-        val action = AyatListFragmentDirections.actionAyatListFragment(number.toInt(), getString(R.string.explanation))
+        val action = SearchFragmentDirections.actionSearchFragmentToAyatExplanationFragment(number.toInt(), getString(R.string.explanation))
         navController.navigate(action)
     }
 

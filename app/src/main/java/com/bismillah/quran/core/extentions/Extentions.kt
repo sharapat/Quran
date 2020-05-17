@@ -73,3 +73,13 @@ val Float.dp: Int
 
 val Int.dpToFloat: Float
     get() = (this/Resources.getSystem().displayMetrics.density)
+
+val String.ifContainsLatin: Boolean
+    get() {
+        this.forEach {
+            if(it.toInt() in 65..90 || it.toInt() in 97..122) {
+                return true
+            }
+        }
+        return false
+    }

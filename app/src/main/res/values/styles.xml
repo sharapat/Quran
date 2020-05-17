@@ -9,10 +9,15 @@
     </style>
 
     <style name="AppThemeDark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">?attr/toolbarColor</item>
+         <item name="colorPrimary">?attr/toolbarColor</item>
         <item name="colorPrimaryDark">@color/colorStatusBarDark</item>
         <item name="colorAccent">#aeaeae</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="ToolBarStyle" parent="Widget.AppCompat.Toolbar">
