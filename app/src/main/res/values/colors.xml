@@ -4,7 +4,6 @@
     <color name="colorPrimaryDark">#002300</color>
     <color name="colorStatusBarDark">#131313</color>
     <color name="colorPrimaryLight">#3f763f</color>
-    <color name="colorAccent">#fff59d</color>
     <color name="white">#ffffff</color>
     <color name="transparent_white">#A3FFFFFF</color>
     <color name="transparent_dark">#A4000000</color>
