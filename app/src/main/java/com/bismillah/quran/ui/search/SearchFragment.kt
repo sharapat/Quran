@@ -2,7 +2,6 @@ package com.bismillah.quran.ui.search
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Html
 import android.view.View
 import android.widget.PopupMenu
 import androidx.core.text.HtmlCompat
@@ -13,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bismillah.quran.R
 import com.bismillah.quran.core.BaseFragment
+import com.bismillah.quran.core.extentions.addVertDivider
 import com.bismillah.quran.core.extentions.ifContainsLatin
 import com.bismillah.quran.core.extentions.onClick
 import com.bismillah.quran.core.extentions.visibility
@@ -24,7 +24,6 @@ import kotlinx.android.synthetic.main.main_toolbar.*
 import kotlinx.android.synthetic.main.search_action.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.lang.Exception
 
 class SearchFragment : BaseFragment(R.layout.fragment_search) {
     private val viewModel: SearchViewModel by viewModel()
@@ -48,6 +47,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         adapter.setOnLinkClickListener(onLinkClick)
         adapter.setOnOptionsClickListener(onOptionsBtnClick)
         recyclerView.adapter = adapter
+        recyclerView.addVertDivider(requireContext())
         viewModel.ayatList.observe(viewLifecycleOwner, Observer {
             if (etSearch.text.isNotEmpty()) {
                 adapter.models = it
@@ -58,13 +58,16 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         viewModel.sureToShare.observe(viewLifecycleOwner, Observer {
             ayatViewModel.getSelectedAyat(selectedAyat.id)
         })
-        ayatViewModel.selectedAyat.observe(viewLifecycleOwner, Observer { ayat->
+        ayatViewModel.selectedAyat.observe(viewLifecycleOwner, Observer { ayat ->
             goToShare(ayat.text)
         })
         etSearch.addTextChangedListener {
             if (it.toString().ifContainsLatin) {
                 btnClearSearchText.visibility(false)
-                etSearch.error = HtmlCompat.fromHtml("<font color=\"#ffffff\">${getString(R.string.you_can_not_use_latin)}<font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                etSearch.error = HtmlCompat.fromHtml(
+                    "<font color=\"#ffffff\">${getString(R.string.you_can_not_use_latin)}<font>",
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
                 return@addTextChangedListener
             }
             if (it.toString().isNotEmpty()) {
@@ -93,7 +96,10 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
     }
 
     private val onLinkClick = { number: String ->
-        val action = SearchFragmentDirections.actionSearchFragmentToAyatExplanationFragment(number.toInt(), getString(R.string.explanation))
+        val action = SearchFragmentDirections.actionSearchFragmentToAyatExplanationFragment(
+            number.toInt(),
+            getString(R.string.explanation)
+        )
         navController.navigate(action)
     }
 
@@ -113,7 +119,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         val inflater = popupMenu.menuInflater
         inflater.inflate(R.menu.menu_ayat_item, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.item_favorite -> {
                     ayatViewModel.setFavorite(ayat.id)
                     toastSH(getString(R.string.ayat_has_been_added_to_favorites))
@@ -142,19 +148,19 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         return "${getString(R.string.app_name)}\n${sure?.number} - ${sure?.name}, $ayatNumber-аят:"
     }
 
-    private fun getAyatTextWithoutNumber(ayatText: String) : String {
+    private fun getAyatTextWithoutNumber(ayatText: String): String {
         val subject = getShareSubjectText(getNumberFromAyatText(ayatText))
         val number = ayatText.substring(0, ayatText.indexOf('.'))
         var result = if (number.isDigitsOnly()) {
             ayatText.substring(ayatText.indexOf('.') + 2, ayatText.length)
         } else ayatText
-        while(result.indexOf("<sup>") >= 0) {
-            result = result.removeRange(result.indexOf("<sup>"), result.indexOf("</sup>")+6)
+        while (result.indexOf("<sup>") >= 0) {
+            result = result.removeRange(result.indexOf("<sup>"), result.indexOf("</sup>") + 6)
         }
         return "$subject\n\n$result"
     }
 
-    private fun getNumberFromAyatText(ayatText: String) : Int {
+    private fun getNumberFromAyatText(ayatText: String): Int {
         if (ayatText.indexOf('.') < 0) return 0
         val number = ayatText.substring(0, ayatText.indexOf('.'))
         return if (number.isDigitsOnly()) {
