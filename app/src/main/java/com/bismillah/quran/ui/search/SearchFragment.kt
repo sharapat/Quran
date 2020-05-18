@@ -1,31 +1,37 @@
-package com.bismillah.quran.ui.translation.ayat
+package com.bismillah.quran.ui.search
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import android.widget.PopupMenu
+import androidx.core.text.HtmlCompat
 import androidx.core.text.isDigitsOnly
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
 import com.bismillah.quran.R
 import com.bismillah.quran.core.BaseFragment
-import com.bismillah.quran.core.extentions.addVertDivider
+import com.bismillah.quran.core.extentions.ifContainsLatin
 import com.bismillah.quran.core.extentions.onClick
+import com.bismillah.quran.core.extentions.visibility
+import com.bismillah.quran.data.model.Ayat
+import com.bismillah.quran.ui.main.MainActivity
+import com.bismillah.quran.ui.translation.ayat.AyatListViewModel
 import kotlinx.android.synthetic.main.layout_recycler.*
-import kotlinx.android.synthetic.main.reading_page_toolbar.*
+import kotlinx.android.synthetic.main.main_toolbar.*
+import kotlinx.android.synthetic.main.search_action.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.lang.Exception
 
-class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
-
-    private val viewModel: AyatListViewModel by viewModel()
-    private val adapter: AyatListAdapter by inject()
-    private val safeArgs: AyatListFragmentArgs by navArgs()
+class SearchFragment : BaseFragment(R.layout.fragment_search) {
+    private val viewModel: SearchViewModel by viewModel()
+    private val ayatViewModel: AyatListViewModel by viewModel()
+    private val adapter: SearchAdapter by inject()
+    private lateinit var selectedAyat: Ayat
     private lateinit var navController: NavController
-    private lateinit var sureName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,45 +40,66 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        etSearch.hint = getString(R.string.seach_by_ayat)
+        if (etSearch.text.isNullOrEmpty()) {
+            adapter.models = emptyList()
+        }
         navController = Navigation.findNavController(view)
         adapter.setOnLinkClickListener(onLinkClick)
         adapter.setOnOptionsClickListener(onOptionsBtnClick)
         recyclerView.adapter = adapter
-        recyclerView.addVertDivider(context)
-        val sureId = safeArgs.sureId
-        viewModel.getAyatList(sureId)
-        viewModel.getSureById(sureId)
-        viewModel.selectedAyat.observe(viewLifecycleOwner, Observer { ayat->
+        viewModel.ayatList.observe(viewLifecycleOwner, Observer {
+            if (etSearch.text.isNotEmpty()) {
+                adapter.models = it
+            } else {
+                adapter.models = emptyList()
+            }
+        })
+        viewModel.sureToShare.observe(viewLifecycleOwner, Observer {
+            ayatViewModel.getSelectedAyat(selectedAyat.id)
+        })
+        ayatViewModel.selectedAyat.observe(viewLifecycleOwner, Observer { ayat->
             goToShare(ayat.text)
         })
-        viewModel.currentSure.observe(viewLifecycleOwner, Observer {
-            tvToolbarTitle.text = it.name
-            sureName = it.name
-        })
-        viewModel.ayatList.observe(viewLifecycleOwner, Observer {
+        etSearch.addTextChangedListener {
+            if (it.toString().ifContainsLatin) {
+                btnClearSearchText.visibility(false)
+                etSearch.error = HtmlCompat.fromHtml("<font color=\"#ffffff\">${getString(R.string.you_can_not_use_latin)}<font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                return@addTextChangedListener
+            }
+            if (it.toString().isNotEmpty()) {
+                btnClearSearchText.visibility(true)
+            } else {
+                btnClearSearchText.visibility(false)
+            }
+            viewModel.searchAyatByWord(it.toString())
+        }
+        btnMode.onClick {
+            settings.changeAppMode()
+            (requireActivity() as MainActivity).updateThemeAndRecreateActivity()
+        }
+        btnClearSearchText.onClick {
+            etSearch.text.clear()
+        }
+        setModeBtnImage()
+    }
 
-            adapter.models = it
-        })
-        backButton.onClick {
-            activity?.onBackPressed()
-        }
-        btnPlus.onClick {
-            settings.increaseTextSize()
-            adapter.update()
-        }
-        btnMinus.onClick {
-            settings.decreaseTextSize()
-            adapter.update()
+    private fun setModeBtnImage() {
+        if (settings.isAppDarkMode()) {
+            btnMode.setImageResource(R.drawable.sun)
+        } else {
+            btnMode.setImageResource(R.drawable.moon)
         }
     }
 
     private val onLinkClick = { number: String ->
-        val action = AyatListFragmentDirections.actionAyatListFragment(number.toInt(), sureName)
+        val action = SearchFragmentDirections.actionSearchFragmentToAyatExplanationFragment(number.toInt(), getString(R.string.explanation))
         navController.navigate(action)
     }
 
-    private val onOptionsBtnClick = { view: View, ayatId: Int ->
+    private val onOptionsBtnClick = { view: View, ayat: Ayat ->
         val popupMenu = PopupMenu(context, view)
+        selectedAyat = ayat
         try {
             val field = popupMenu.javaClass.getDeclaredField("mPopup")
             field.isAccessible = true
@@ -88,12 +115,12 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.item_favorite -> {
-                    viewModel.setFavorite(ayatId)
+                    ayatViewModel.setFavorite(ayat.id)
                     toastSH(getString(R.string.ayat_has_been_added_to_favorites))
                     return@setOnMenuItemClickListener true
                 }
                 R.id.item_share -> {
-                    viewModel.getSelectedAyat(ayatId)
+                    viewModel.getSureById(ayat.sureId)
                     return@setOnMenuItemClickListener true
                 }
                 else -> return@setOnMenuItemClickListener false
@@ -111,7 +138,7 @@ class AyatListFragment : BaseFragment(R.layout.fragment_ayat_list) {
 
     private fun getShareSubjectText(ayatNumber: Int): String {
         if (ayatNumber == 0) return ""
-        val sure = viewModel.currentSure.value
+        val sure = viewModel.sureToShare.value
         return "${getString(R.string.app_name)}\n${sure?.number} - ${sure?.name}, $ayatNumber-аят:"
     }
 

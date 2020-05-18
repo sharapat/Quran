@@ -13,8 +13,9 @@ import com.bismillah.quran.core.BaseFragment
 import com.bismillah.quran.core.extentions.addVertDivider
 import com.bismillah.quran.core.extentions.onClick
 import com.bismillah.quran.ui.main.MainActivity
-import kotlinx.android.synthetic.main.fragment_sure_list.*
+import kotlinx.android.synthetic.main.layout_recycler.*
 import kotlinx.android.synthetic.main.main_toolbar.*
+import kotlinx.android.synthetic.main.search_action.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SureListFragment : BaseFragment(R.layout.fragment_sure_list) {
@@ -28,9 +29,9 @@ class SureListFragment : BaseFragment(R.layout.fragment_sure_list) {
         setModeBtnImage()
         navController = Navigation.findNavController(view)
         adapter.setOnItemClickListener(onSureItemClick)
-        adapter.setOnOriginalSureClickListener(onOriginalSureClick)
-        rvSure.adapter = adapter
-        rvSure.addVertDivider(context)
+        adapter.setOnOriginalSureClick(onOriginalSureClick)
+        recyclerView.adapter = adapter
+        recyclerView.addVertDivider(context)
 
         viewModel.sureList.observe(viewLifecycleOwner, Observer {
             adapter.models = it

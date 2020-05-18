@@ -15,6 +15,7 @@ import com.bismillah.quran.Settings
 import com.bismillah.quran.data.model.Ayat
 import com.bismillah.quran.core.extentions.inflate
 import com.bismillah.quran.core.extentions.onClick
+import com.bismillah.quran.core.extentions.setTextViewHtml
 import kotlinx.android.synthetic.main.item_favorite.view.*
 
 class FavoriteListAdapter(private val settings: Settings) : RecyclerView.Adapter<FavoriteListAdapter.FavoriteViewHolder>() {
@@ -34,7 +35,7 @@ class FavoriteListAdapter(private val settings: Settings) : RecyclerView.Adapter
     private var onItemClick: (view: View, ayatId: Int, position: Int) -> Unit = { _, _, _ ->
         Log.w("Warning", "onItemClick is not set to FavoriteListAdapter")
     }
-    private var onLinkClick: (Int) -> Unit = {
+    private var onLinkClick: (String) -> Unit = {
         Log.w("Warning", "onLinkClick is not set to FavoriteListAdapter")
     }
 
@@ -42,7 +43,7 @@ class FavoriteListAdapter(private val settings: Settings) : RecyclerView.Adapter
         this.onItemClick = onItemClick
     }
 
-    fun setOnLinkClickListener(onLinkClick: (Int) -> Unit) {
+    fun setOnLinkClickListener(onLinkClick: (String) -> Unit) {
         this.onLinkClick = onLinkClick
     }
 
@@ -60,38 +61,12 @@ class FavoriteListAdapter(private val settings: Settings) : RecyclerView.Adapter
     inner class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populateModel(model: Ayat, position: Int) {
             itemView.tvSureName.text = model.sureName
-            setTextViewHtml(itemView.tvAyatText, model.text)
+            itemView.tvAyatText.setTextViewHtml(model.text, onLinkClick)
             itemView.tvSureName.textSize = settings.getTextSize().toFloat()
             itemView.tvAyatText.textSize = settings.getTextSize().toFloat()
             itemView.optionBtn.onClick {
                 onItemClick.invoke(itemView.optionBtn, model.id, position)
             }
-        }
-
-        private fun makeLinkClickable(strBuilder: SpannableStringBuilder, span: URLSpan) {
-            val start = strBuilder.getSpanStart(span)
-            val end = strBuilder.getSpanEnd(span)
-            val flags = strBuilder.getSpanFlags(span)
-            val clickable = object: ClickableSpan() {
-                override fun onClick(widget: View) {
-                    val fullText = (widget as TextView).text.toString()
-                    val link = fullText.substring(start, end)
-                    onLinkClick.invoke(link.toInt())
-                }
-            }
-            strBuilder.setSpan(clickable, start, end, flags)
-            strBuilder.removeSpan(span)
-        }
-
-        private fun setTextViewHtml(tv: TextView, html: String) {
-            val sequence: CharSequence = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_LEGACY)
-            val strBuilder = SpannableStringBuilder(sequence)
-            val urls = strBuilder.getSpans(0, sequence.length, URLSpan::class.java)
-            for (span in urls) {
-                makeLinkClickable(strBuilder, span)
-            }
-            tv.text = strBuilder
-            tv.movementMethod = LinkMovementMethod.getInstance()
         }
     }
 }

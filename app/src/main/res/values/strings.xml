@@ -16,5 +16,7 @@
     <string name="empty_favorites_text">Сайландылар бос</string>
     <string name="ayat_has_been_added_to_favorites">Аят сайландылар дизимине қосылды</string>
     <string name="share_ayat">Аятты бөлисиў</string>
-    <string name="sure_description">\"%1$s\" \"%2$s\" </string>
+    <string name="sure_description">%1$s %2$s</string>
+    <string name="seach_by_ayat">Аят бойынша излеў</string>
+    <string name="you_can_not_use_latin">Ҳазирше латын ҳариплери арқалы излеў мүмкин емес</string>
 </resources>

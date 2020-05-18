@@ -15,7 +15,7 @@ class AyatListAdapter(private val settings: Settings) : RecyclerView.Adapter<Aya
         Log.w("Warning", "onOptionsClick function is not set to AyatListAdapter" )
     }
 
-    private var onLinkClick: (Int) -> Unit = { _ ->
+    private var onLinkClick: (String) -> Unit = { _ ->
         Log.w("Warning", "onLinkClick functions is not set to AyatListAdapter")
     }
 
@@ -33,7 +33,7 @@ class AyatListAdapter(private val settings: Settings) : RecyclerView.Adapter<Aya
         onOptionsClick = onOptionsClickListener
     }
 
-    fun setOnLinkClickListener(onLinkClickListener: (number: Int) -> Unit) {
+    fun setOnLinkClickListener(onLinkClickListener: (String) -> Unit) {
         onLinkClick = onLinkClickListener
     }
 

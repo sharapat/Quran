@@ -9,8 +9,8 @@ import kotlinx.android.synthetic.main.item_sure.view.*
 
 class SureListViewHolder(
     itemView: View,
-    private val onItemClick:(sureId: Int, sureName: String) -> Unit,
-    private val onOriginalSureClick:(sureId: Int) -> Unit
+    private val onSureItemClick: (sureId: Int, sureName: String) -> Unit,
+    private val onOriginalSureClick: (sureId: Int) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
     fun populateModel(sure: Sure, isOriginalTextNeeded: Boolean) {
         itemView.tvNumber.text = sure.number.toString()
@@ -20,7 +20,7 @@ class SureListViewHolder(
         if (isOriginalTextNeeded)
             itemView.tvOriginalName.text = sure.originalName
         itemView.onClick {
-            onItemClick.invoke(sure.id, sure.name)
+            onSureItemClick.invoke(sure.id, sure.name)
         }
         itemView.tvOriginalName.onClick {
             onOriginalSureClick.invoke(sure.id)

@@ -15,8 +15,9 @@ import com.bismillah.quran.core.extentions.onClick
 import com.bismillah.quran.ui.main.MainActivity
 import com.bismillah.quran.ui.translation.sure.SureListAdapter
 import com.bismillah.quran.ui.translation.sure.SureListViewModel
-import kotlinx.android.synthetic.main.fragment_sure_list.*
+import kotlinx.android.synthetic.main.layout_recycler.*
 import kotlinx.android.synthetic.main.main_toolbar.*
+import kotlinx.android.synthetic.main.search_action.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list) {
@@ -29,9 +30,9 @@ class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list) {
         hideKeyboard(requireActivity())
         setModeBtnImage()
         navController = Navigation.findNavController(view)
-        rvSure.adapter = adapter
+        recyclerView.adapter = adapter
         adapter.setOnItemClickListener(onItemClick)
-        rvSure.addVertDivider(context)
+        recyclerView.addVertDivider(context)
 
         viewModel.sureList.observe(viewLifecycleOwner, Observer {
             adapter.models = it
@@ -47,9 +48,7 @@ class ExplanationSureListFragment : BaseFragment(R.layout.fragment_sure_list) {
         }
 
         etSearch.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                fillRecyclerView(s)
-            }
+            override fun afterTextChanged(s: Editable?) { fillRecyclerView(s) }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })

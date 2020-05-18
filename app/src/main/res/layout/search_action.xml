@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/rlSearch"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_small"
+    android:layout_marginTop="@dimen/margin_small"
+    android:layout_marginEnd="@dimen/margin_small"
+    android:layout_marginBottom="@dimen/margin_small"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_search"
+        android:hint="@string/search_by_title"
+        android:textColorHint="?attr/metaTextColor"
+        android:textColor="?attr/textColor"
+        android:padding="@dimen/margin_small"
+        android:textSize="@dimen/text_size_standard"
+        android:drawableStart="@drawable/ic_search_black_24dp"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
+        android:importantForAutofill="no" />
+
+    <ImageView
+        android:id="@+id/btnClearSearchText"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_close_black_24dp"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/margin_small"
+        android:contentDescription="@string/todo"
+        android:visibility="gone"/>
+
+</RelativeLayout>

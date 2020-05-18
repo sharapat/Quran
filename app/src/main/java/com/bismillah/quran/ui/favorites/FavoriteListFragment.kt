@@ -47,8 +47,8 @@ class FavoriteListFragment : BaseFragment(R.layout.fragment_favorites) {
         }
     }
 
-    private val onLinkClick = { number: Int ->
-        val action = FavoriteListFragmentDirections.actionFavoriteListFragmentToAyatExplanationFragment(number, getString(R.string.favorites))
+    private val onLinkClick = { number: String ->
+        val action = FavoriteListFragmentDirections.actionFavoriteListFragmentToAyatExplanationFragment(number.toInt(), getString(R.string.favorites))
         navController.navigate(action)
     }
 
