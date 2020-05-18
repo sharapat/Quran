@@ -15,9 +15,9 @@
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light">
-        <item name="android:windowBackground">@drawable/splash_bg</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 
     <style name="ToolBarStyle" parent="Widget.AppCompat.Toolbar">

@@ -3,6 +3,8 @@ package com.bismillah.quran.ui.splash
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.lifecycle.Observer
 import com.bismillah.quran.R
 import com.bismillah.quran.Settings
@@ -20,6 +22,9 @@ class SplashActivity : AppCompatActivity() {
     private val settings: Settings by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         if (!settings.isAppFirstLaunch()) {
