@@ -57,9 +57,13 @@ class SearchAdapter(private val settings: Settings) : RecyclerView.Adapter<Searc
             itemView.tvSureName.textSize = settings.getTextSize().toFloat()
             itemView.tvText.textSize = settings.getTextSize().toFloat()
             itemView.tvSureName.text = model.second.sureName
-
-            itemView.tvText.setTextViewHtml(model.second.text.replace(model.first,
-                "<b>${model.first}</b>"), onLinkClick)
+            if (settings.isAppDarkMode()) {
+                itemView.tvText.setTextViewHtml(model.second.text.replace(model.first,
+                    "<span style=\"color: #ffd600\">${model.first}</span>"), onLinkClick)
+            } else {
+                itemView.tvText.setTextViewHtml(model.second.text.replace(model.first,
+                    "<span style=\"background-color: #ffd600\">${model.first}</span>"), onLinkClick)
+            }
 
             itemView.optionBtn.onClick {
                 onOptionsClick.invoke(itemView.optionBtn, model.second)
